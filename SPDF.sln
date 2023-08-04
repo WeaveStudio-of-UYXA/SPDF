@@ -3,23 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPDF", "SPDF\SPDF.vcxproj", "{3811ADF1-0E87-4B8B-95D4-B6CDB04341DA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPDF", "SPDF\SPDF.vcxproj", "{7DC45FE1-DFA4-4BD1-936A-0518959F893C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
+		DllDebug|x64 = DllDebug|x64
+		DllRelease|x64 = DllRelease|x64
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3811ADF1-0E87-4B8B-95D4-B6CDB04341DA}.Debug|x64.ActiveCfg = Debug|x64
-		{3811ADF1-0E87-4B8B-95D4-B6CDB04341DA}.Debug|x64.Build.0 = Debug|x64
-		{3811ADF1-0E87-4B8B-95D4-B6CDB04341DA}.Release|x64.ActiveCfg = Release|x64
-		{3811ADF1-0E87-4B8B-95D4-B6CDB04341DA}.Release|x64.Build.0 = Release|x64
+		{7DC45FE1-DFA4-4BD1-936A-0518959F893C}.Debug|x64.ActiveCfg = Debug|x64
+		{7DC45FE1-DFA4-4BD1-936A-0518959F893C}.Debug|x64.Build.0 = Debug|x64
+		{7DC45FE1-DFA4-4BD1-936A-0518959F893C}.DllDebug|x64.ActiveCfg = DllDebug|x64
+		{7DC45FE1-DFA4-4BD1-936A-0518959F893C}.DllDebug|x64.Build.0 = DllDebug|x64
+		{7DC45FE1-DFA4-4BD1-936A-0518959F893C}.DllRelease|x64.ActiveCfg = DllRelease|x64
+		{7DC45FE1-DFA4-4BD1-936A-0518959F893C}.DllRelease|x64.Build.0 = DllRelease|x64
+		{7DC45FE1-DFA4-4BD1-936A-0518959F893C}.Release|x64.ActiveCfg = Release|x64
+		{7DC45FE1-DFA4-4BD1-936A-0518959F893C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7A2EC914-2209-4250-ADB0-4CAB5ABCB4C0}
+		SolutionGuid = {FC61AA62-A548-4B3B-A9AE-33A9806B5C4B}
 	EndGlobalSection
 EndGlobal

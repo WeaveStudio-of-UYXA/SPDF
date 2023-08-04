@@ -22,4 +22,70 @@
       <Extensions>ts</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SPDFMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPDFPackage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPDFTerminal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDF\cpp\VIECMA_SPOL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPDFHost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPSReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPOLInterpreter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPDFScripts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPDFParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SPDF\private\SPDFCompileMacro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SPDF\SPDF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="SPDF\SPDFPackage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPDFPackageMeta.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPDFHost.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPDFParser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPDFScripts.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPDFTerminal.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPOLInterpreter.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPSReader.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\VIECMA_SPOL.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
 </Project>

@@ -10,6 +10,9 @@
 *.userosscache
 *.sln.docstates
 
+SPDFTemplateFileBackup
+InstallPack
+InstallPackCache
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
