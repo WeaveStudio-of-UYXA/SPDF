@@ -3,7 +3,7 @@
 #include "VIECMA_SPOL.h"
 #include "SPSReader.h"
 
-class SPDFScripts :public VIObject
+class SPDFPublicAPI SPDFScripts :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

@@ -4,17 +4,19 @@ def_init SPOLInterpreter::SPOLInterpreter(SPDFAbstractTerminal* terminal, QMutex
 	Terminal = terminal;
 	ThreadMutex = mutex;
 	ThreadWaitCondition = waitCondition;
-	connect(this, &SPOLInterpreter::onControllers, Terminal, &SPDFAbstractTerminal::onControllers);
+	connect(this, &SPOLInterpreter::onControllers, Terminal, &SPDFAbstractTerminal::privateOnControllers);
+	connect(this, &SPOLInterpreter::spolDocumentChanged, Terminal, &SPDFAbstractTerminal::onSPOLDocumentChanged);
 }
 
 def_del SPOLInterpreter::~SPOLInterpreter() {
-	disconnect(this, &SPOLInterpreter::onControllers, Terminal, &SPDFAbstractTerminal::onControllers);
+	disconnect(this, &SPOLInterpreter::onControllers, Terminal, &SPDFAbstractTerminal::privateOnControllers);
+	disconnect(this, &SPOLInterpreter::spolDocumentChanged, Terminal, &SPDFAbstractTerminal::onSPOLDocumentChanged);
 }
 
 void SPOLInterpreter::addParser(SPDFAbstractControllerParser* parser) {
-	if (!Parsers.contains(parser->getControllerName())) {
+	if (!Parsers.contains(parser->getControllerFlag())) {
 		parser->Context = &SPOLDocumentContext;
-		Parsers.insert(parser->getControllerName(), parser);
+		Parsers.insert(parser->getControllerFlag(), parser);
 		parser->Interpreter = this;
 	}
 	else {
@@ -26,7 +28,7 @@ void SPOLInterpreter::wait() {
 	ThreadWaitCondition->wait(ThreadMutex);
 }
 
-void SPOLInterpreter::executeSPOL(SPDFNamespace::SPOLExecutionMode mode, const QStringList& spol) {
+void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QStringList& spol) {
 	SPOLDocument = spol;
 	executeSPOL(mode);
 }
@@ -51,20 +53,21 @@ QVariant SPOLInterpreter::getVariable(const QString& name) {
 QString SPOLInterpreter::getSPOLWithIndex(unsigned int index) {
 	return SPOLDocument[index];
 }
-void SPOLInterpreter::executeSPOL(SPDFNamespace::SPOLExecutionMode mode, const QString& spol ) {
+void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QString& spol ) {
 	if (spol != "") { SPOLDocument = spol.split("\n"); }
+	emit spolDocumentChanged(SPOLDocument, mode);
 	SceneFinished = false;
 	QStringList ControllersName = Parsers.keys();
 	for (CurrentLine = SPOLDocument.begin(); CurrentLine != SPOLDocument.end();) {
 		if (SceneFinished) {
 			break;
 		}
+		consoleLog("Parsing: " + *CurrentLine);
 		for (auto controllerName = ControllersName.begin(); controllerName != ControllersName.end(); controllerName++) {
-			consoleLog(*CurrentLine);
 			if ((*CurrentLine).startsWith(*controllerName)) {
+				
 				SPDFAbstractControllerParser* par = Parsers[*controllerName];
 				par->Parameters.clear();
-				consoleLog(*CurrentLine);
 				bool success = par->parseLine(*CurrentLine, mode);
 				//可能有线程安全问题，因为抽象控制器解析器是在VIECMAScript的线程中运行的
 				//但是这里的onControllers目标应该是在主线程中运行的
@@ -75,7 +78,7 @@ void SPOLInterpreter::executeSPOL(SPDFNamespace::SPOLExecutionMode mode, const Q
 					SPDFParserResultList* list = new SPDFParserResultList(*(par->getParameters()));
 					if (list->isEmpty()) { break; }
 					else {
-						emit onControllers(list);
+						emit onControllers(list, mode);
 						for (auto i = par->Parameters.begin(); i != par->Parameters.end(); i++) {
 							if (!(*i).NoWait) { wait(); }
 							break;

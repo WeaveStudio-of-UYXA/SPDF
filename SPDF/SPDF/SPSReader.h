@@ -1,9 +1,8 @@
 ﻿#pragma once
-#include "../Visindigo/VICore"
-/*
+#include <VICore>
+#include "private/SPDFCompileMacro.h"
 
-*/
-class SPSReader : public VIObject
+class SPDFPublicAPI SPSReader : public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

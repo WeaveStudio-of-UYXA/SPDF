@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include <VICore>
-
+#include "private/SPDFCompileMacro.h"
 class SPDFScripts;
-class VIECMA_SPOL :public VIObject
+class SPDFPublicAPI VIECMA_SPOL :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -11,4 +11,5 @@ class VIECMA_SPOL :public VIObject
 	_Slot void loadStory(QJSValue spolLinesRaw);
 	_Slot void preloadStory(QJSValue spolLinesRaw);
 	_Slot void installParser(QJSValue parser);
+	_Slot void print(QJSValue str);
 };

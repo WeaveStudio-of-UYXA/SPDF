@@ -1,18 +1,19 @@
 ﻿#pragma once
 #include <VICore>
 #include "SPDFPackageMeta.h"
-namespace SPDFNamespace {
+namespace SPDF {
 	enum class SPOLExecutionMode {
+		SyntaxCheck,
 		Preload,
 		RunTime
 	};
 }
+
 typedef QMap<QString, QVariant> SPDFParaMap;
 class SPDFPublicAPI SPDFParserResult
 {
 	_Public QString MethodName = "Unknown";
 	_Public SPDFParaMap Parameters;
-	_Public SPDFNamespace::SPOLExecutionMode ExecutionMode = SPDFNamespace::SPOLExecutionMode::RunTime;
 	_Public bool NoWait = false;
 	_Public def_init SPDFParserResult() {}
 	_Public def_copy SPDFParserResult(const SPDFParserResult& obj);
@@ -37,6 +38,7 @@ class SPDFPublicAPI SPDFAbstractTerminal :public VIObject
 	_Signal void controllerHandled();
 	_Public def_init SPDFAbstractTerminal(VISuper* parent = VI_NULLPTR):VIObject(parent) {}
 	_Slot virtual void controllerFinishedListener() final;
-	_Slot virtual void preControllers(SPDFParserResultList* ParserList) final;
-	_Slot virtual void onControllers(SPDFParserResultList* ParserList) PureVirtual;
+	_Slot virtual void privateOnControllers(SPDFParserResultList* ParserList, SPDF::SPOLExecutionMode mode) final;
+	_Slot virtual void onControllers(SPDFParserResultList* ParserList, SPDF::SPOLExecutionMode mode) PureVirtual;
+	_Slot virtual void onSPOLDocumentChanged(const QStringList& spol, SPDF::SPOLExecutionMode mode) PureVirtual;
 };

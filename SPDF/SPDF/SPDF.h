@@ -1,3 +1,9 @@
 ﻿#pragma once
 #include "SPDFHost.h"
 #include "SPDFPackageMeta.h"
+#include "SPDFPackage.h"
+#include "SPDFTerminal.h"
+#include "SPDFScripts.h"
+#include "SPDFParser.h"
+#include "SPOLInterpreter.h"
+#include "SPSReader.h"

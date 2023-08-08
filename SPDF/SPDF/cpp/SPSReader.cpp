@@ -3,6 +3,7 @@
 QStringList SPSReader::spawnAllStoryFile(const QString& mainFilePath) {
 	//find all js file in the folder that contains the main file, and the subfolder of the folder, but ignore any folder with name "__story__"
 	QString FileFolder = mainFilePath.section('/', 0, -2);
+	VIConsole::printLine("Root folder: " + FileFolder);
 	QStringList allJSFilePath;
 	QDirIterator it(FileFolder, QStringList() << "*.js" << "*.sps", QDir::Files, QDirIterator::Subdirectories);
 	while (it.hasNext()) {
@@ -11,9 +12,11 @@ QStringList SPSReader::spawnAllStoryFile(const QString& mainFilePath) {
 			continue;
 		}
 		allJSFilePath.append(filePath);
+		VIConsole::printLine("Found JS file: " + filePath);
 	}
 	QStringList allStoryFilePath;
 	for (auto i = allJSFilePath.begin(); i != allJSFilePath.end(); i++) {
+		VIConsole::printLine("Spawning story file: " + *i);
 		allStoryFilePath.append(spawnStoryFile(*i));
 	}
 	return allStoryFilePath;
@@ -59,6 +62,7 @@ QString SPSReader::spawnStoryFile(const QString& rawJSFilePath) {
 \n//Any changes you make will not be saved.\
 \n//此文档由SPS解析器自动生成，每次启动Visindigo.JS之前此文件都会被刷新。\n//您的任何更改都不会保存。\n\
 export function " + StoryFileName + "_SPOL() {}\n";
+	targetJSCode += "SPOL.print(\"" + StoryFileName + " loaded.\")\n";
 	QString StoryPartName = "__head__";
 	QString StoryPartContent = "";
 	targetJSCode += "\n" + StoryFileName + "_SPOL." + StoryPartName + " = [";
@@ -77,7 +81,9 @@ export function " + StoryFileName + "_SPOL() {}\n";
 	}
 	if (StoryPartName != "") {
 		targetJSCode += StoryPartContent + "\"\"];\n";
+		targetJSCode += "SPOL.preloadStory(" + StoryFileName + "_SPOL." + StoryPartName + ");\n";
 	}
+
 	targetJSCode += "\n";
 	QFile targetJSFile;
 	targetJSFile.setFileName(StoryFilePath + "_SPOL.js");

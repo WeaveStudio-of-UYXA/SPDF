@@ -26,6 +26,7 @@ namespace SPDF {
 	}
 	def_init Package::Package() {
 		VI_Singleton_Init;
+		qRegisterMetaType<SPDF::SPOLExecutionMode>("SPDF::SPOLExecutionMode");
 		setPackageMeta(new SPDF::PackageMeta);
 		getPackageMeta()->addTranslatableObject(this);
 		getPackageMeta()->initTranslation();

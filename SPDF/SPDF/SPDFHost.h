@@ -35,6 +35,6 @@ class SPDFPublicAPI SPDFHost :public VIObject
 	_Public SPDFScripts* Scripts;
 	_Public SPDFAbstractTerminal* Terminal;
 	_Protected def_init SPDFHost(SPDFAbstractTerminal* ter, VISuper* parent = VI_NULLPTR);
-	_Public void installParser(SPDFAbstractControllerParser* p);
 	_Public void exec(QString filePath);
+	_Public void installParser(SPDFAbstractControllerParser* p);
 };
