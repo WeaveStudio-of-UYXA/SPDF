@@ -18,6 +18,11 @@ void SPDFScripts::addParser(SPDFAbstractControllerParser* parser) {
 
 void SPDFScripts::exec(const QString& path, const QString& entry) {
 	emit starting();
+	if (ESSPOL == VI_NULLPTR) {
+		ESSPOL = new VIECMA_SPOL();
+		ESSPOL->Scripts = this;
+		ScriptsEngine->importVIObject(ESSPOL);
+	}
 	consoleLog("Preparing to convert VIS to standard ES6...");
 	SPSReader::spawnAllStoryFile(path);
 	consoleLog("VIS converted to standard ES6.");

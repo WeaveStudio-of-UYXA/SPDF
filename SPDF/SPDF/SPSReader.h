@@ -8,5 +8,5 @@ class SPDFPublicAPI SPSReader : public VIObject
 	VI_OBJECT;
 	VI_STATIC_CLASS (SPSReader);
 	_Public static QStringList spawnAllStoryFile(const QString& mainFilePath);
-	_Public static QString spawnStoryFile(const QString& rawJSFilePath);
+	_Public static QString spawnStoryFile(const QString& mainFilePath, const QString& rawJSFilePath);
 };

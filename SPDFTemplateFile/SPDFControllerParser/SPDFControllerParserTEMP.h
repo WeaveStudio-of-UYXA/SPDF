@@ -37,4 +37,18 @@ class $itemname$ :public SPDFAbstractControllerParser
 
 		return false; //这行是免费赠送的，省的您看上面的长文后把这玩意搞忘记了
 	}
+	_Public void onSPOLDocumentChanged(const QStringList& spol, SPDF::SPOLExecutionMode mode) {
+		//此函数告知您当前执行的SPOL文档已经更改，向您出示文档原文并传递执行模式
+		//请注意，由于您可能会在场景开始前处理点别的事情，因此本函数执行的时候，VIECMA是暂停的
+		//如果您在此函数中的操作结束，请在结束后调用一次控制器已处理函数，即controllerHandled()
+		//我们先帮您调用一次，省的您忘记导致VIECMA卡住。您可以根据实际需要改变controllerHandled的调用位置
+		controllerHandled();
+	}
+	_Public void onSceneFinished(SPDF::SPOLExecutionMode mode){
+		//此函数告知您当前执行的SPOL文档已经执行完毕，并向您传递执行模式
+		//请注意，由于您可能会在场景结束后处理点别的事情，因此本函数执行的时候，VIECMA是暂停的
+		//如果您在此函数中的操作结束，请在结束后调用一次控制器已处理函数，即controllerHandled()
+		//我们先帮您调用一次，省的您忘记导致VIECMA卡住。您可以根据实际需要改变controllerHandled的调用位置
+		controllerHandled();
+	}
 };

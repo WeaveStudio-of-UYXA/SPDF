@@ -6,11 +6,13 @@ def_init SPOLInterpreter::SPOLInterpreter(SPDFAbstractTerminal* terminal, QMutex
 	ThreadWaitCondition = waitCondition;
 	connect(this, &SPOLInterpreter::onControllers, Terminal, &SPDFAbstractTerminal::privateOnControllers);
 	connect(this, &SPOLInterpreter::spolDocumentChanged, Terminal, &SPDFAbstractTerminal::onSPOLDocumentChanged);
+	connect(this, &SPOLInterpreter::sceneFinished, Terminal, &SPDFAbstractTerminal::onSceneFinished);
 }
 
 def_del SPOLInterpreter::~SPOLInterpreter() {
 	disconnect(this, &SPOLInterpreter::onControllers, Terminal, &SPDFAbstractTerminal::privateOnControllers);
 	disconnect(this, &SPOLInterpreter::spolDocumentChanged, Terminal, &SPDFAbstractTerminal::onSPOLDocumentChanged);
+	disconnect(this, &SPOLInterpreter::sceneFinished, Terminal, &SPDFAbstractTerminal::onSceneFinished);
 }
 
 void SPOLInterpreter::addParser(SPDFAbstractControllerParser* parser) {
@@ -22,6 +24,10 @@ void SPOLInterpreter::addParser(SPDFAbstractControllerParser* parser) {
 	else {
 		return;
 	}
+}
+
+void SPOLInterpreter::addSPOL(const QString& metaName, const QStringList& spol) {
+	SPOLDocumentMap.insert(metaName, spol);
 }
 
 void SPOLInterpreter::wait() {
@@ -56,16 +62,17 @@ QString SPOLInterpreter::getSPOLWithIndex(unsigned int index) {
 void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QString& spol ) {
 	if (spol != "") { SPOLDocument = spol.split("\n"); }
 	emit spolDocumentChanged(SPOLDocument, mode);
+	wait();
 	SceneFinished = false;
 	QStringList ControllersName = Parsers.keys();
 	for (CurrentLine = SPOLDocument.begin(); CurrentLine != SPOLDocument.end();) {
+		if (*CurrentLine == "") { CurrentLine++; continue; }
 		if (SceneFinished) {
 			break;
 		}
 		consoleLog("Parsing: " + *CurrentLine);
 		for (auto controllerName = ControllersName.begin(); controllerName != ControllersName.end(); controllerName++) {
 			if ((*CurrentLine).startsWith(*controllerName)) {
-				
 				SPDFAbstractControllerParser* par = Parsers[*controllerName];
 				par->Parameters.clear();
 				bool success = par->parseLine(*CurrentLine, mode);
@@ -96,5 +103,6 @@ void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QString& s
 		}
 	}
 	SceneFinished = true;
-	emit sceneFinished();
+	emit sceneFinished(mode);
+	wait();
 }

@@ -5,7 +5,8 @@ namespace SPDF {
 	enum class SPOLExecutionMode {
 		SyntaxCheck,
 		Preload,
-		RunTime
+		RunTime,
+		Render
 	};
 }
 
@@ -41,4 +42,5 @@ class SPDFPublicAPI SPDFAbstractTerminal :public VIObject
 	_Slot virtual void privateOnControllers(SPDFParserResultList* ParserList, SPDF::SPOLExecutionMode mode) final;
 	_Slot virtual void onControllers(SPDFParserResultList* ParserList, SPDF::SPOLExecutionMode mode) PureVirtual;
 	_Slot virtual void onSPOLDocumentChanged(const QStringList& spol, SPDF::SPOLExecutionMode mode) PureVirtual;
+	_Slot virtual void onSceneFinished(SPDF::SPOLExecutionMode mode) PureVirtual;
 };

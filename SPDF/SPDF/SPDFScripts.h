@@ -13,7 +13,7 @@ class SPDFPublicAPI SPDFScripts :public VIObject
 	_Signal void finished();
 	friend class VIECMA_SPOL;
 	_Protected VIECMAScripts* ScriptsEngine;
-	_Protected SPOLInterpreter* Interpreter = VI_NULLPTR;
+	_Public SPOLInterpreter* Interpreter = VI_NULLPTR;
 	_Private QMutex* Mutex;
 	_Private QWaitCondition* WaitCondition;
 	_Private QList<SPDFAbstractControllerParser*> Parsers;
