@@ -4,8 +4,8 @@
 */
 #pragma once
 #include <VICore>
-#if VI_VERSION_MAJOR != 0 || VI_VERSION_MINOR != 11 || VI_VERSION_PATCH != 0
- #error "This template is only for Visindigo 0.11.0, please use the correct version of Visindigo!"
+#if VI_VERSION_MAJOR != 0 || VI_VERSION_MINOR != 12 || VI_VERSION_PATCH != 0
+ #error "This template is only for Visindigo 0.12.0, please use the correct version of Visindigo!"
 #endif
 
 // 以下宏定义了SPDF的版本号，您可以在此修改版本号。

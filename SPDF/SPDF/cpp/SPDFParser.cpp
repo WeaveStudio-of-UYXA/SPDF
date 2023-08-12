@@ -73,8 +73,8 @@ QStringList SPDFAbstractControllerParser::scientificSplit(const QString& str, co
 	result.append(temp);
 	return result;
 }
-def_init  SPDFVIESParserContainer::SPDFVIESParserContainer(QJSValue parser) {
-	Engine = parser.engine();
+def_init  SPDFVIESParserContainer::SPDFVIESParserContainer(QJSEngine* engine, QJSValue parser) {
+	Engine = engine;
 	VIES_SPDFParser = parser;
 	VIES_onParseLine = parser.property("onParseLine");
 	ControllerFlag = parser.property("ControllerFlag").toString();

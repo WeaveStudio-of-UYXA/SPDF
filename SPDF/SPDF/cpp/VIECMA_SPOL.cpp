@@ -20,7 +20,7 @@ void VIECMA_SPOL::preloadStory(QJSValue metaName, QJSValue spolLinesRaw) {
 	consoleLog("SPOL story preloaded.");
 }
 void VIECMA_SPOL::installParser(QJSValue parser) {
-	SPDFVIESParserContainer* parserContainer = new SPDFVIESParserContainer(parser);
+	SPDFVIESParserContainer* parserContainer = new SPDFVIESParserContainer(Scripts->ScriptsEngine->getEngine(), parser);
 	Scripts->Interpreter->addParser(parserContainer);
 }
 void VIECMA_SPOL::print(QJSValue text) {
