@@ -37,7 +37,7 @@ class SPDFPublicAPI SPDFVIESParserContainer :public SPDFAbstractControllerParser
 	_Public QJSValue VIES_SPDFParser;
 	_Public QJSValue VIES_onParseLine;
 	_Public QJSEngine* Engine;
-	_Public def_init SPDFVIESParserContainer(QJSEngine* engine, QJSValue parser);
+	_Public def_init SPDFVIESParserContainer(QJSValue parser);
 	_Public virtual bool onParseLine(const QString& line, SPDF::SPOLExecutionMode mode);
 	_Public virtual SPDFParserResultList* getParameters() override;
 };

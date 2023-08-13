@@ -38,7 +38,7 @@ QString SPSReader::spawnStoryFile(const QString& mainFilePath, const QString& ra
 	rawFile.setFileName(rawJSFilePath);
 	rawFile.open(QIODevice::ReadOnly | QIODevice::Text);
 	QTextStream rawFileStream(&rawFile);
-	rawFileStream.setEncoding(QStringConverter::Utf8);
+	rawFileStream.setCodec("UTF-8");
 	bool inSPOLComment = false;
 	QStringList storyFileContent;
 	while (true) {
@@ -96,7 +96,7 @@ export function " + StoryFileName + "_SPOL() {}\n";
 	}
 	targetJSFile.open(QIODevice::NewOnly | QIODevice::Text);
 	QTextStream targetJSFileStream(&targetJSFile);
-	targetJSFileStream.setEncoding(QStringConverter::Utf8);
+	targetJSFileStream.setCodec("UTF-8");
 	targetJSFileStream << targetJSCode;
 	targetJSFile.close();
 	return StoryFilePath;
