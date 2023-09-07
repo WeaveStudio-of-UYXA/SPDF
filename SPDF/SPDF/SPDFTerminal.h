@@ -6,6 +6,7 @@ namespace SPDF {
 		SyntaxCheck,
 		Preload,
 		RunTime,
+		StepDebug,
 		Render
 	};
 }

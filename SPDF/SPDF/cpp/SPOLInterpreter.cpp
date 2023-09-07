@@ -30,13 +30,8 @@ void SPOLInterpreter::addSPOL(const QString& metaName, const QStringList& spol) 
 	SPOLDocumentMap.insert(metaName, spol);
 }
 
-void SPOLInterpreter::wait() {
-	ThreadWaitCondition->wait(ThreadMutex);
-}
-
-void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QStringList& spol) {
-	SPOLDocument = spol;
-	executeSPOL(mode);
+QString SPOLInterpreter::getSPOLWithIndex(unsigned int index) {
+	return SPOLDocument[index];
 }
 
 unsigned long long SPOLInterpreter::getExecuteLineIndex() {
@@ -56,45 +51,17 @@ QVariant SPOLInterpreter::getVariable(const QString& name) {
 	return Variables[name];
 }
 
-QString SPOLInterpreter::getSPOLWithIndex(unsigned int index) {
-	return SPOLDocument[index];
-}
-void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QString& spol ) {
-	if (spol != "") { SPOLDocument = spol.split("\n"); }
+void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QStringList& spol) {
+	SPOLDocument = spol;
 	emit spolDocumentChanged(SPOLDocument, mode);
 	wait();
 	SceneFinished = false;
-	QStringList ControllersName = Parsers.keys();
 	for (CurrentLine = SPOLDocument.begin(); CurrentLine != SPOLDocument.end();) {
 		if (*CurrentLine == "") { CurrentLine++; continue; }
 		if (SceneFinished) {
 			break;
 		}
-		consoleLog("Parsing: " + *CurrentLine);
-		for (auto controllerName = ControllersName.begin(); controllerName != ControllersName.end(); controllerName++) {
-			if ((*CurrentLine).startsWith(*controllerName)) {
-				SPDFAbstractControllerParser* par = Parsers[*controllerName];
-				par->Parameters.clear();
-				bool success = par->parseLine(*CurrentLine, mode);
-				//可能有线程安全问题，因为抽象控制器解析器是在VIECMAScript的线程中运行的
-				//但是这里的onControllers目标应该是在主线程中运行的
-				//主要目前从逻辑上来说，Parameters在解析之后VIECMAScript中应该没人会动它
-				//然后紧接着就是主线程拿去用，用完之后就会被清空，所以暂时不管了
-				if (!success) { continue; }//以后可以整个内部异常机制
-				else {
-					SPDFParserResultList* list = new SPDFParserResultList(*(par->getParameters()));
-					if (list->isEmpty()) { break; }
-					else {
-						emit onControllers(list, mode);
-						for (auto i = par->Parameters.begin(); i != par->Parameters.end(); i++) {
-							if (!(*i).NoWait) { wait(); }
-							break;
-						}
-						break;
-					}
-				}
-			}
-		}
+		executeSPOLSingleLine(*CurrentLine, mode);
 		if (!lineChanged) {
 			CurrentLine++;
 		}
@@ -105,4 +72,42 @@ void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QString& s
 	SceneFinished = true;
 	emit sceneFinished(mode);
 	wait();
+}
+
+void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QString& metaName ) {
+	if (metaName == "") { return; }
+	if (SPOLDocumentMap.contains(metaName)) {
+		executeSPOL(mode, SPOLDocumentMap[metaName]);
+	}
+}
+
+void SPOLInterpreter::executeSPOLSingleLine(const QString& line, SPDF::SPOLExecutionMode mode) {
+	consoleLog("Parsing: " + line);
+	for (auto controllerName = Parsers.keys().begin(); controllerName != Parsers.keys().end(); controllerName++) {
+		if (line.startsWith(*controllerName)) {
+			SPDFAbstractControllerParser* par = Parsers[*controllerName];
+			par->Parameters.clear();
+			bool success = par->parseLine(line, mode);
+			//可能有线程安全问题，因为抽象控制器解析器是在VIECMAScript的线程中运行的
+			//但是这里的onControllers目标应该是在主线程中运行的
+			//主要目前从逻辑上来说，Parameters在解析之后VIECMAScript中应该没人会动它
+			//然后紧接着就是主线程拿去用，用完之后就会被清空，所以暂时不管了
+			if (!success) { continue; }//以后可以整个内部异常机制
+			else {
+				SPDFParserResultList* list = new SPDFParserResultList(*(par->getParameters()));
+				if (list->isEmpty()) { break; }
+				else {
+					emit onControllers(list, mode);
+					for (auto i = par->Parameters.begin(); i != par->Parameters.end(); i++) {
+						if (!(*i).NoWait) { wait(); }
+						break;
+					}
+					break;
+				}
+			}
+		}
+	}
+}
+void SPOLInterpreter::wait() {
+	ThreadWaitCondition->wait(ThreadMutex);
 }

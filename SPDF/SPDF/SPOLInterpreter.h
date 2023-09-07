@@ -34,12 +34,13 @@ class SPDFPublicAPI SPOLInterpreter :public VIObject
 	_Public def_del ~SPOLInterpreter();
 	_Public void addParser(SPDFAbstractControllerParser* parser);
 	_Public void addSPOL(const QString& metaName, const QStringList& spol);
-	_Private void wait();
-	_Public void executeSPOL(SPDF::SPOLExecutionMode mode, const QStringList& spol);
+	_Public QString getSPOLWithIndex(unsigned int index);
 	_Public unsigned long long getExecuteLineIndex();
 	_Public void changeExecuteLine(unsigned int index);
 	_Public void setVariable(const QString& name, const QVariant& value);
 	_Public QVariant getVariable(const QString& name);
-	_Public QString getSPOLWithIndex(unsigned int index);
-	_Public void executeSPOL(SPDF::SPOLExecutionMode mode, const QString& spol = "");
+	_Public void executeSPOL(SPDF::SPOLExecutionMode mode, const QStringList& spol);
+	_Public void executeSPOL(SPDF::SPOLExecutionMode mode, const QString& metaName);
+	_Public void executeSPOLSingleLine(const QString& line, SPDF::SPOLExecutionMode mode = SPDF::SPOLExecutionMode::StepDebug);
+	_Private void wait();
 };
