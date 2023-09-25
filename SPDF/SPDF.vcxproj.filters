@@ -50,6 +50,9 @@
     <ClCompile Include="SPDF\cpp\SPDFParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPOLAbstractSegment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SPDF\private\SPDFCompileMacro.h">
@@ -88,6 +91,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="SPDF\VIECMA_SPOL.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPOLAbstractSegment.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPOLClassicTester.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

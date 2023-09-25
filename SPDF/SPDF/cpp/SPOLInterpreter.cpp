@@ -7,12 +7,20 @@ def_init SPOLInterpreter::SPOLInterpreter(SPDFAbstractTerminal* terminal, QMutex
 	connect(this, &SPOLInterpreter::onControllers, Terminal, &SPDFAbstractTerminal::privateOnControllers);
 	connect(this, &SPOLInterpreter::spolDocumentChanged, Terminal, &SPDFAbstractTerminal::onSPOLDocumentChanged);
 	connect(this, &SPOLInterpreter::sceneFinished, Terminal, &SPDFAbstractTerminal::onSceneFinished);
+	SPOLSegment_SWITCH* sw = new SPOLSegment_SWITCH();
+	sw->SegmentName = "SWITCH";
+	SegmentParserList.append(sw);
+	sw->Interpreter = this;
 }
 
 def_del SPOLInterpreter::~SPOLInterpreter() {
 	disconnect(this, &SPOLInterpreter::onControllers, Terminal, &SPDFAbstractTerminal::privateOnControllers);
 	disconnect(this, &SPOLInterpreter::spolDocumentChanged, Terminal, &SPDFAbstractTerminal::onSPOLDocumentChanged);
 	disconnect(this, &SPOLInterpreter::sceneFinished, Terminal, &SPDFAbstractTerminal::onSceneFinished);
+	while (!SegmentStack.isEmpty()) {
+		SegmentStack.top()->deleteLater();
+		SegmentStack.pop();
+	}
 }
 
 void SPOLInterpreter::addParser(SPDFAbstractControllerParser* parser) {
@@ -34,6 +42,9 @@ QString SPOLInterpreter::getSPOLWithIndex(unsigned int index) {
 	return SPOLDocument[index];
 }
 
+quint32 SPOLInterpreter::getCurrentSPOLDocumentLength() {
+	return SPOLDocument.length();
+}
 unsigned long long SPOLInterpreter::getExecuteLineIndex() {
 	return CurrentLine - SPOLDocument.begin();
 }
@@ -55,13 +66,23 @@ void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QStringLis
 	SPOLDocument = spol;
 	emit spolDocumentChanged(SPOLDocument, mode);
 	wait();
+	SegmentStack.clear();
 	SceneFinished = false;
-	for (CurrentLine = SPOLDocument.begin(); CurrentLine != SPOLDocument.end();) {
-		if (*CurrentLine == "") { CurrentLine++; continue; }
+	SPOLSegment_Global* global = new SPOLSegment_Global();
+	SegmentStack.push(global);
+	CurrentLine = SPOLDocument.begin();
+	while (CurrentLine != SPOLDocument.end()) {
 		if (SceneFinished) {
 			break;
 		}
-		executeSPOLSingleLine(*CurrentLine, mode);
+		qint32 indentChar = checkIndent(CurrentLine);
+		if (lineChanged) {
+			lineChanged = false;
+			continue;
+		}
+		QString line = CurrentLine->right(CurrentLine->length() - indentChar);
+		if (line.isEmpty()) { CurrentLine++; continue; }
+		executeSPOLSingleLine(line, mode);
 		if (!lineChanged) {
 			CurrentLine++;
 		}
@@ -74,6 +95,85 @@ void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QStringLis
 	wait();
 }
 
+qint32 SPOLInterpreter::checkIndent(QStringList::iterator& line) {
+	qint32 indent = 0;
+	qint32 indentCount = 0;
+	for (auto c : *line) {
+		if (c == '\t') {
+			indentCount += 4;
+			indent++;
+		}
+		else if (c == ' ') {
+			indentCount++;
+			indent++;
+		}
+		else {
+			break;
+		}
+	}
+	CurrentIndent = indentCount;
+	qint32 LastIndent;
+	if (SegmentStack.top()->SegmentIndentStack.isEmpty()) {
+		LastIndent = SegmentStack.top()->FirstIndentStack.top();
+	}
+	else {
+		LastIndent = SegmentStack.top()->SegmentIndentStack.top();
+	}
+	if (LastIndent == indentCount) {
+		return indent;
+	}
+	else if (LastIndent > indentCount) {
+		while (SegmentStack.top()->SegmentIndentStack.top() >= indentCount) {
+			bool exit = SegmentStack.top()->onIndentMinus();
+			if (!exit) {
+				break;
+			}
+			else {
+				popSegment();
+			}
+		}
+	}
+	else {
+		if (allowIndentAdd) {
+			SegmentStack.top()->SegmentIndentStack.push(indentCount);
+		}
+		else {
+			throw "Unexpected Indent add. Syntax Error.";
+		}
+		allowIndentAdd = false;
+	}
+	return indent;
+}
+
+qint32 SPOLInterpreter::indentCount(const QString& line) {
+	qint32 indentCount = 0;
+	for (auto c : line) {
+		if (c == '\t') {
+			indentCount += 4;
+		}
+		else if (c == ' ') {
+			indentCount++;
+		}
+		else {
+			break;
+		}
+	}
+	return indentCount;
+}
+
+qint32 SPOLInterpreter::indentCharCount(const QString& line) {
+	qint32 indentCount = 0;
+	for (auto c : line) {
+		if (c == '\t' || c== ' ') {
+			indentCount ++;
+		}
+		else {
+			break;
+		}
+	}
+	return indentCount;
+}
+
 void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QString& metaName ) {
 	if (metaName == "") { return; }
 	if (SPOLDocumentMap.contains(metaName)) {
@@ -83,6 +183,16 @@ void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode, const QString& m
 
 void SPOLInterpreter::executeSPOLSingleLine(const QString& line, SPDF::SPOLExecutionMode mode) {
 	consoleLog("Parsing: " + line);
+	for (auto i : SegmentParserList) {
+		if (line.startsWith(i->SegmentName)) {
+			SegmentStack.push(i);
+			i->FirstIndentStack.push(CurrentIndent);
+			i->onParseLine(line, mode);
+			allowIndentAdd = true;
+			return;
+		}
+	}
+	if (Parsers.isEmpty()) { return; }
 	for (auto controllerName = Parsers.keys().begin(); controllerName != Parsers.keys().end(); controllerName++) {
 		if (line.startsWith(*controllerName)) {
 			SPDFAbstractControllerParser* par = Parsers[*controllerName];
@@ -107,6 +217,12 @@ void SPOLInterpreter::executeSPOLSingleLine(const QString& line, SPDF::SPOLExecu
 			}
 		}
 	}
+}
+
+void SPOLInterpreter::popSegment() {
+	SegmentStack.top()->FirstIndentStack.pop();
+	SegmentStack.top()->SegmentIndentStack.pop();
+	SegmentStack.pop();
 }
 void SPOLInterpreter::wait() {
 	ThreadWaitCondition->wait(ThreadMutex);

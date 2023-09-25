@@ -1,6 +1,5 @@
 ﻿#pragma execution_character_set("utf-8")
 #pragma once
-#include "../Visindigo/VICore"
 #include "SPDFPackage.h"
 #include <iostream>
 #include <string>
@@ -29,7 +28,7 @@ class SPDFTestAnimation_Text :public VIAnimationBehavior
 		RawText = text.toStdString();
 		this->setDuration(s * 1000);
 	}
-	_Public void onActive() override {
+	_Public void onStart() override {
 		CurrentText = "";
 		CurrentTime = 0;
 		index = 0;
@@ -44,7 +43,7 @@ class SPDFTestAnimation_Text :public VIAnimationBehavior
 			}
 		}
 	}
-	_Public void onSubside() override {
+	_Public void onStop() override {
 		std::cout << std::endl;
 		emit finished();
 	}
@@ -58,7 +57,7 @@ class SPDFClassicTester :public SPDFAbstractTerminal
 		TextAnimation = new SPDFTestAnimation_Text(this);
 		connect(TextAnimation, &SPDFTestAnimation_Text::finished, this, &SPDFClassicTester::controllerHandled);
 	}
-	_Slot void onControllers(SPDFParserResultList* list) override {
+	_Slot void onControllers(SPDFParserResultList* list, SPDF::SPOLExecutionMode mode) override {
 		consoleLog("get controllers, count: " + QString::number(list->length()) + ".");
 		bool noController = true;
 		for (auto i = list->begin(); i != list->end(); i++) {
@@ -69,10 +68,16 @@ class SPDFClassicTester :public SPDFAbstractTerminal
 			if (i->MethodName == "YSP.10X.Speaking") {
 				noController = false;
 				TextAnimation->setTextAnimation(i->Parameters["Text"].toString(), i->Parameters["SecondPerChar"].toDouble(), i->Parameters["SecondLineEnd"].toDouble());
-				TextAnimation->active();
+				TextAnimation->start();
 				continue;
 			}
 		}
 		if (noController) { emit controllerHandled(); }
+	}
+	_Public virtual void onSPOLDocumentChanged(const QStringList& spol, SPDF::SPOLExecutionMode mode) {
+		controllerHandled();
+	}
+	_Public virtual void onSceneFinished(SPDF::SPOLExecutionMode mode) {
+		controllerHandled();
 	}
 };

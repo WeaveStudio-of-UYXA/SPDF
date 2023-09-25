@@ -24,6 +24,7 @@
     <ClCompile Include="SPDF\cpp\SPDFParser.cpp" />
     <ClCompile Include="SPDF\cpp\SPDFScripts.cpp" />
     <ClCompile Include="SPDF\cpp\SPDFTerminal.cpp" />
+    <ClCompile Include="SPDF\cpp\SPOLAbstractSegment.cpp" />
     <ClCompile Include="SPDF\cpp\SPOLInterpreter.cpp" />
     <ClCompile Include="SPDF\cpp\SPSReader.cpp" />
     <ClCompile Include="SPDF\cpp\VIECMA_SPOL.cpp" />
@@ -32,6 +33,8 @@
   <ItemGroup>
     <ClInclude Include="SPDF\SPDFControllerDocument.h" />
     <ClInclude Include="SPDF\SPDF.h" />
+    <QtMoc Include="SPDF\SPOLClassicTester.h" />
+    <QtMoc Include="SPDF\SPOLAbstractSegment.h" />
     <QtMoc Include="SPDF\VIECMA_SPOL.h" />
     <QtMoc Include="SPDF\SPSReader.h" />
     <QtMoc Include="SPDF\SPOLInterpreter.h" />
