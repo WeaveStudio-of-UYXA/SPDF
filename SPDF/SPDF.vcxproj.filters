@@ -58,6 +58,9 @@
     <ClInclude Include="SPDF\SPDF.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SPDF\SPDFControllerDocument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="SPDF\SPDFPackage.h">

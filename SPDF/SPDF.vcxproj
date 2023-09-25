@@ -30,6 +30,7 @@
     <ClCompile Include="SPDFMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SPDF\SPDFControllerDocument.h" />
     <ClInclude Include="SPDF\SPDF.h" />
     <QtMoc Include="SPDF\VIECMA_SPOL.h" />
     <QtMoc Include="SPDF\SPSReader.h" />
@@ -116,23 +117,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <ExternalIncludePath>D:\Visindigo\0.11.0\x64\Debug\Visindigo;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>D:\Visindigo\0.11.0\x64\Debug;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@1.2.0)\x64\Debug\Visindigo;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@1.2.0)\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">
-    <ExternalIncludePath>D:\Visindigo\0.11.0\x64\Debug\Visindigo;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>D:\Visindigo\0.11.0\x64\Debug;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@1.2.0)\x64\Debug\Visindigo;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@1.2.0)\x64\Debug;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>D:\Visindigo\0.11.0\x64\Release;$(LibraryPath)</LibraryPath>
-    <ExternalIncludePath>D:\Visindigo\0.11.0\x64\Release\Visindigo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
+    <LibraryPath>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@1.2.0)\x64\Release;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@1.2.0)\x64\Release\Visindigo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>D:\Visindigo\0.11.0\x64\Release;$(LibraryPath)</LibraryPath>
-    <ExternalIncludePath>D:\Visindigo\0.11.0\x64\Release\Visindigo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
+    <LibraryPath>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@1.2.0)\x64\Release;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@1.2.0)\x64\Release\Visindigo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>

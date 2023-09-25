@@ -1,0 +1,41 @@
+{
+    "Tag": ">>>",
+    "Name": "SPDF::DialogueController",
+    "Function": false,
+    "Count": 2,
+    "Split": ":",
+    "EscapeCharAccept": true,
+    "SubPartCount": [ 2, 3],
+    "SubPart": {
+        "2": ["CharaInfo", "Text"],
+        "3": ["CharaInfo", "DisplayName", "Text"]
+    },
+    "CustomStruct": {
+        "CharaInfo": {
+            "Name": "CharaInfo",
+            "Default": "",
+            "Split": "/",
+            "EscapeCharAccept": true,
+            "SubPartCount": [5],
+            "SubPart": {
+                "5": [
+                    { "Name": "FileName", "Default": "" },
+                    { "Name": "Emotion", "Default": "" },
+                    { "Name": "Filter", "Default": "" },
+                    { "Name": "FadeIn", "Default": "0" },
+                    { "Name": "FadeOut", "Default": "0"}
+                ]
+            }
+        },
+        "DisplayName": { "Name": "DisplayName", "Default": "" },
+        "Text":{ "Name": "Text", "Default": "" }
+    },
+    "ConstValue": [
+        {
+            "comment": "Const value means that this value does not accept ",
+            "comment2": "user input and is filled in by default by this rule.",
+            "comment3": "It is commonly used to implement a simplified variant of an existing controller",
+            "comment4": "The format of const values is the same as that of regular values."
+        }
+    ] 
+}

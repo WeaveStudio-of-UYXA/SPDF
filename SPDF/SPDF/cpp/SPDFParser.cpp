@@ -51,28 +51,6 @@ SPDFParserResultList* SPDFAbstractControllerParser::getParameters() {
 	return &Parameters;
 }
 
-QStringList SPDFAbstractControllerParser::scientificSplit(const QString& str, const QChar& ch) {
-	QStringList result;
-	QString temp = "";
-	bool backslash = false;
-	for (auto i = 0; i < str.length(); i++) {
-		if (str[i] == ch && !backslash) {
-			result.append(temp);
-			temp = "";
-		}
-		else {
-			if (str[i] == '\\') {
-				backslash = true;
-			}
-			else {
-				backslash = false;
-			}
-			temp += str[i];
-		}
-	}
-	result.append(temp);
-	return result;
-}
 def_init  SPDFVIESParserContainer::SPDFVIESParserContainer(QJSValue parser) {
 	Engine = parser.engine();
 	VIES_SPDFParser = parser;

@@ -25,7 +25,6 @@ class SPDFPublicAPI SPDFAbstractControllerParser :public VIObject
 	_Public QVariant getVariable(const QString& name);
 	_Public QString getSPOLWithIndex(unsigned int index);
 	_Protected virtual SPDFParserResultList* getParameters();
-	_Public QStringList scientificSplit(const QString& str, const QChar& ch);
 };
 
 typedef SPDFAbstractControllerParser SPDFTopInterface;
