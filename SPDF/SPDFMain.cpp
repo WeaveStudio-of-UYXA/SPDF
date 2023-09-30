@@ -2,6 +2,7 @@
 #include <VICore>
 #include <VIWidgets>
 #include "SPDF/SPDFPackage.h"
+#include "SPDF/SPOLClassicTester.h"
 #ifndef SPDF_DEVELOPER
 visindigo Program {
 	VIFramework Frame(sysArgv);
@@ -17,7 +18,9 @@ visindigo Program {
 	VIConsole::printLine(VIConsole::inSuccessStyle("Hello world!"));
 	LOAD_PACKAGE(SPDF::Package);
 
-
+	SPDFClassicTester* tester = new SPDFClassicTester();
+	SPDF::Package::getInstance()->attachNewHostToTerminal(tester);
+	tester->Host->exec("./SPDF/resource/syn.js");
 	// AAAAAAAAAAAAAAAAAAA
 	Frame.start(); // 启动框架，此行之后的代码将不会被执行
 } ProgramEnd;

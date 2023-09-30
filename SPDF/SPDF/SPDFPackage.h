@@ -14,6 +14,6 @@ namespace SPDF {
 		_Private SPDFHost* Host;
 		_Public def_init Package();
 		_Public virtual void onTranslating() override HalfVirtual;
-		_Public void attachNewHostToTerminal(SPDFAbstractTerminal* terminal);
+		_Public void attachNewHostToTerminal(SPDFAbstractStage* terminal);
 	};
 }

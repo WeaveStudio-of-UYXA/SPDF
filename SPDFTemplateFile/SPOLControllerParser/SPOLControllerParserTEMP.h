@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include <SPDF>
 
-class $itemname$ :public SPDFAbstractControllerParser
+class $itemname$ :public SPOLAbstractControllerParser
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Public def_init $itemname$() :SPDFAbstractControllerParser() {
+	_Public def_init $itemname$() :SPOLAbstractControllerParser() {
 		setControllerFlag("$itemname$"); //此项设置您的控制器在SPOL中的行首标识符，必须设置且必须唯一
 		setFunctionLike(true); //此项设置您的控制器看上去是否像是一个函数，如果是的话，那么您的控制器行首标识符后的正文内容必须在一对括号中
 		setControllerColor(QColor(0, 0, 0)); //此项用于后期的语法高亮，您可以设置您的控制器的颜色

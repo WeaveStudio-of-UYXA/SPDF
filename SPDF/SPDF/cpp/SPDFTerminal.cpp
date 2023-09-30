@@ -1,34 +1,34 @@
 ﻿#include "../SPDFTerminal.h"
 
 /*
-SPDFParserResult
+SPDFControllerData
 */
 
-def_copy SPDFParserResult::SPDFParserResult(const SPDFParserResult& obj) {
+def_copy SPDFControllerData::SPDFControllerData(const SPDFControllerData& obj) {
 	MethodName = obj.MethodName;
 	Parameters = obj.Parameters;
 	NoWait = obj.NoWait;
 }
 
-def_move SPDFParserResult::SPDFParserResult(SPDFParserResult&& obj) {
+def_move SPDFControllerData::SPDFControllerData(SPDFControllerData&& obj) {
 	MethodName = obj.MethodName;
 	Parameters = obj.Parameters;
 	NoWait = obj.NoWait;
 }
 
-SPDFParserResult& SPDFParserResult::operator=(const SPDFParserResult& obj) {
+SPDFControllerData& SPDFControllerData::operator=(const SPDFControllerData& obj) {
 	MethodName = obj.MethodName;
 	Parameters = obj.Parameters;
 	NoWait = obj.NoWait;
 	return *this;
 }
 
-void SPDFAbstractTerminal::controllerFinishedListener(){
+void SPDFAbstractStage::controllerFinishedListener(){
 	ControllerWaitCount--;
 	if (ControllerWaitCount == 0) { controllerHandled(); }
 }
 
-void SPDFAbstractTerminal::privateOnControllers(SPDFParserResultList* ParserList, SPDF::SPOLExecutionMode mode) {
+void SPDFAbstractStage::privateOnControllers(SPDFControllerDataList* ParserList, SPDF::SPOLExecutionMode mode) {
 	ControllerWaitCount = 0;
 	for (auto& i : *ParserList) {
 		if (!i.NoWait) { ControllerWaitCount++; }

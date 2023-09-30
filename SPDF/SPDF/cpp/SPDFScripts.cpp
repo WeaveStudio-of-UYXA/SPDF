@@ -1,25 +1,25 @@
 ﻿#include "../SPDFScripts.h"
 
-def_init SPDFScripts::SPDFScripts(SPDFAbstractTerminal* ter, VISuper* parent) :VIObject(parent) {
+def_init SPDFScripts::SPDFScripts(SPDFAbstractStage* ter, VISuper* parent) :VIObject(parent) {
 	Terminal = ter;
 	ScriptsEngine = new VIECMAScripts();
 	Mutex = ScriptsEngine->getThreadMutex();
 	WaitCondition = ScriptsEngine->getThreadWaitCondition();
 	connect(ScriptsEngine, &VIECMAScripts::finished, this, &SPDFScripts::onThreadFinished);
-	connect(Terminal, &SPDFAbstractTerminal::controllerHandled, this, &SPDFScripts::awake);
-	ESSPOL = new VIECMA_SPOL();
+	connect(Terminal, &SPDFAbstractStage::controllerHandled, this, &SPDFScripts::awake);
+	ESSPOL = new VIECMA_SPDF();
 	ESSPOL->Scripts = this;
 	ScriptsEngine->importVIObject(ESSPOL);
 }
 
-void SPDFScripts::addParser(SPDFAbstractControllerParser* parser) {
+void SPDFScripts::addParser(SPOLAbstractControllerParser* parser) {
 	Parsers.append(parser);
 }
 
 void SPDFScripts::exec(const QString& path, const QString& entry) {
 	emit starting();
 	if (ESSPOL == VI_NULLPTR) {
-		ESSPOL = new VIECMA_SPOL();
+		ESSPOL = new VIECMA_SPDF();
 		ESSPOL->Scripts = this;
 		ScriptsEngine->importVIObject(ESSPOL);
 	}

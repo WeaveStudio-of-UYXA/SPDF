@@ -2,12 +2,12 @@
 #include <VICore>
 #include "private/SPDFCompileMacro.h"
 class SPDFScripts;
-class SPDFPublicAPI VIECMA_SPOL :public VIObject
+class SPDFPublicAPI VIECMA_SPDF :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Public SPDFScripts* Scripts;
-	_Public def_init VIECMA_SPOL();
+	_Public def_init VIECMA_SPDF();
 	_Slot void loadStory(QJSValue spolLinesRaw);
 	_Slot void preloadStory(QJSValue metaName, QJSValue spolLinesRaw);
 	_Slot void installParser(QJSValue parser);
