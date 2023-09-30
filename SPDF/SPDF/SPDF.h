@@ -2,7 +2,7 @@
 #include "SPDFHost.h"
 #include "SPDFPackage.h"
 #include "SPDFPackageMeta.h"
-#include "SPDFTerminal.h"
+#include "SPDFAbstractStage.h"
 #include "SPDFScripts.h"
 #include "SPOLAbstractParser.h"
 #include "SPOLAbstractSegment.h"

@@ -5,29 +5,30 @@
 export function syn_SPOL() {}
 
 syn_SPOL.__head__ = 
-[""];
+[""];//0
 SPDF.preloadStory("SPDF.resource.syn.__head__",syn_SPOL.__head__);
 
 syn_SPOL.PartA = 
-["SWITCH 2", 
-"    CASE 1", 
-"        >>>:\"Hello World 1\"", 
-"    CASE 2", 
-"        >>>:\"Hello World 2\"", 
-"        SWITCH 5", 
-"            CASE 4", 
-"                >>>:\"Hello World 2-4\"", 
-"            CASE 5", 
-"                >>>:\"Hello World 2-5\"", 
-"                SWITCH 1", 
-"                    CASE 1", 
-"                        >>>:\"Hello World 2-5-1\"", 
-"                    CASE 2", 
-"                        >>>:\"Hello World 2-5-2\"", 
-"    CASE 3", 
-"        >>>:\"Hello World 3\"", 
-">>>:\"Hello World 0\"", 
-"", 
-""];
+[">>>青雅音/2/3//1:???:3333>>>T2:ssss", //0
+"SWITCH 2", //1
+"    CASE 1", //2
+"        >>>:\"Hello World 1\"", //3
+"    CASE 2", //4
+"        >>>:\"Hello World 2\"", //5
+"        SWITCH 5", //6
+"            CASE 4", //7
+"                >>>:\"Hello World 2-4\"", //8
+"            CASE 5", //9
+"                >>>:\"Hello World 2-5\"", //10
+"                SWITCH 1", //11
+"                    CASE 1", //12
+"                        >>>:\"Hello World 2-5-1\"", //13
+"                    CASE 2", //14
+"                        >>>:\"Hello World 2-5-2\"", //15
+"    CASE 3", //16
+"        >>>:\"Hello World 3\"", //17
+">>>:\"Hello World 0\"", //18
+"", //19
+""];//20
 SPDF.preloadStory("SPDF.resource.syn.PartA",syn_SPOL.PartA);
 

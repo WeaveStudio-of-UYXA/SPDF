@@ -116,7 +116,10 @@ void SPOLInterpreter::executeSPOLSingleLine(const QString& line, SPDF::SPOLExecu
 	}
 	if (ParserManager->getParsersCount() == 0) { return; }
 	SPOLAbstractControllerParser* parser = ParserManager->identifyFlag(line);
-	if (parser == nullptr) { return; } //这也需要一个兜底控制器
+	if (parser == nullptr) { 
+		consoleLog("No parser identified. Skip.");
+		return; 
+	} //这也需要一个兜底控制器
 	parser->Parameters.clear();
 	bool success = parser->parseLine(line, mode);
 	//可能有线程安全问题，因为抽象控制器解析器是在VIECMAScript的线程中运行的
@@ -169,6 +172,9 @@ qint32 SPOLInterpreter::checkIndent(const QString& line) {
 	}
 	else if (LastIndent > indentCount) {
 		while (SegmentStack.top()->SegmentIndentStack.top() > indentCount) {
+			if (SegmentStack.length() == 1) {
+				break;
+			}
 			bool exit = SegmentStack.top()->onIndentMinus();
 			if (!exit) {
 				break;

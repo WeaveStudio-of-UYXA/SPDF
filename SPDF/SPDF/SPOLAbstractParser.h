@@ -38,6 +38,19 @@ class SPDFPublicAPI SPOLVIESParserContainer :public SPOLAbstractControllerParser
 	_Public virtual SPDFControllerDataList* getParameters() override;
 };
 
+class SPDFPublicAPI SPOLStandardControllerParser :public SPOLAbstractControllerParser
+{
+	Q_OBJECT;
+	VI_OBJECT;
+	_Private VIDocument::VIJSON* ControllerJSON;
+	_Private QString BottomInterfaceName;
+	_Private int Count = 1;
+	_Public def_init SPOLStandardControllerParser();
+	_Public void setControllerJSON(const QString& path);
+	_Public virtual bool onParseLine(const QString& line, SPDF::SPOLExecutionMode mode);
+	_Private bool onParseLine(const QString& line, QString rootJSON, SPDFControllerData* data);
+	_Private bool parseSubPart(const QString& part, const QString& structName, QString rootJSON, SPDFControllerData* data);
+};
 class SPDFPublicAPI SPOLControllerParserManager :public VIObject
 {
 	Q_OBJECT;

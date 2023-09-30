@@ -49,6 +49,7 @@ bool SPOLDocumentManager::hasDocument(const QString& name) {
 void SPOLDocumentManager::changeCurrentLineIndex(int index) {
 	if (CurrentDocument != nullptr) {
 		if (index >= 0 && index < CurrentDocument->size()) {
+			consoleLog("changeCurrentLineIndex: " + QString::number(index) + " " + QString::number(CurrentDocument->size()));
 			CurrentLine = CurrentDocument->begin() + index;
 			CurrentLineChanged = true;
 		}
@@ -62,17 +63,20 @@ int SPOLDocumentManager::getCurrentLineIndex() {
 	if (CurrentDocument != nullptr) {
 		return CurrentLine - CurrentDocument->begin();
 	}
+	return -1;
 }
 
 int SPOLDocumentManager::getCurrentDocumentLength() {
 	if (CurrentDocument != nullptr) {
 		return CurrentDocument->size();
 	}
+	return -1;
 }
 QString SPOLDocumentManager::getCurrentLine() {
 	if (CurrentDocument != nullptr) {
 		return *CurrentLine;
 	}
+	return "";
 }
 
 QString SPOLDocumentManager::getLine(int index) {
@@ -81,6 +85,7 @@ QString SPOLDocumentManager::getLine(int index) {
 			return CurrentDocument->at(index);
 		}
 	}
+	return "";
 }
 
 QString SPOLDocumentManager::iterateNextLine() {
@@ -90,10 +95,12 @@ QString SPOLDocumentManager::iterateNextLine() {
 		CurrentLine++;
 		return rtn;
 	}
+	return "";
 }
 
 bool SPOLDocumentManager::iterateEnd() {
 	if (CurrentDocument != nullptr) {
 		return CurrentLine == CurrentDocument->end();
 	}
+	return true;
 }

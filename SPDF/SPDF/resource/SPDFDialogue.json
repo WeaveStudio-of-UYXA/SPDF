@@ -1,0 +1,30 @@
+{
+    "Tag": ">>>",
+    "Name": "SPDF::DialogueController",
+    "Waiting": true,
+    "Function": false,
+    "Count": 2,
+    "Split": ":",
+    "SubPart": {
+        "2": ["CharaInfo", "Text"],
+        "3": ["CharaInfo", "DisplayName", "Text"]
+    },
+    "CustomStruct": {
+        "CharaInfo": {
+            "Name": "CharaInfo",
+            "Default": " ",
+            "Split": "/",
+            "SubPart": {
+                "5": [
+                    { "Name": "FileName", "Default": "" },
+                    { "Name": "Emotion", "Default": "" },
+                    { "Name": "Filter", "Default": "" },
+                    { "Name": "FadeIn", "Default": "0" },
+                    { "Name": "FadeOut", "Default": "0"}
+                ]
+            }
+        },
+        "DisplayName": { "Name": "DisplayName", "Default": "" },
+        "Text":{ "Name": "Text", "Default": "" }
+    }
+}

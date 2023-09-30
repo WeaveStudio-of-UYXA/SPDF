@@ -3,7 +3,7 @@
 
 void SPOLSegment_SWITCH::onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) {
 	QString exp = line.mid(7, line.length() - 7); // 7 = switch + space
-	int p = 1;
+	int p = 0;
 	bool getACASE = false;
 	qint32 caseIndent = 0;
 	while (true) {
@@ -32,6 +32,8 @@ void SPOLSegment_SWITCH::onParseLine(const QString& line, SPDF::SPOLExecutionMod
 					caseIndent = indent;
 				}
 				QString caseExp = SPOL.mid(5, SPOL.length() - 5);
+				consoleLog("caseExp: " + caseExp);
+				consoleLog("exp: " + exp);
 				if (caseExp == exp) {
 					Interpreter->changeExecuteLine(Interpreter->getExecuteLineIndex() + p + 1);
 					return;
@@ -43,7 +45,7 @@ void SPOLSegment_SWITCH::onParseLine(const QString& line, SPDF::SPOLExecutionMod
 }
 
 bool SPOLSegment_SWITCH::onIndentMinus() {
-	int p = 0;
+	int p = -1;
 	while (true) {
 		if (Interpreter->getExecuteLineIndex() + p >= Interpreter->getCurrentSPOLDocumentLength()) {
 			break;

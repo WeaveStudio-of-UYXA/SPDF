@@ -20,6 +20,9 @@ visindigo Program {
 
 	SPDFClassicTester* tester = new SPDFClassicTester();
 	SPDF::Package::getInstance()->attachNewHostToTerminal(tester);
+	SPOLStandardControllerParser* parser = new SPOLStandardControllerParser();
+	parser->setControllerJSON("./SPDF/resource/SPDFDialogue.json");
+	tester->Host->installParser(parser);
 	tester->Host->exec("./SPDF/resource/syn.js");
 	// AAAAAAAAAAAAAAAAAAA
 	Frame.start(); // 启动框架，此行之后的代码将不会被执行

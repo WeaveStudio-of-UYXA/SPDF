@@ -27,6 +27,8 @@ class SPDFPublicAPI SPOLSegment_FUNC :public SPOLAbstractSegment
 	_Public def_init SPOLSegment_FUNC() {
 		FirstIndentStack.push(-4);
 		SegmentIndentStack.push(0);
+		FuncNameStack.push("__global__");
+		FuncNameMap.insert("__global__", 0);
 	}
 	_Public virtual void onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) override {}
 	_Public virtual bool onIndentMinus() override { return true; }

@@ -70,21 +70,24 @@ export function " + StoryFileName + "_SPOL() {}\n";
 	QString StoryPartName = "__head__";
 	QString StoryPartContent = "";
 	targetJSCode += "\n" + StoryFileName + "_SPOL." + StoryPartName + " = \n[";
+	int lineIndex = 0;
 	for (auto i = storyFileContent.begin(); i != storyFileContent.end(); i++) {
 		if (i->startsWith("-->")) {
 			if (StoryPartName != "") {
-				targetJSCode += StoryPartContent + "\"\"];\n";
+				targetJSCode += StoryPartContent + "\"\"];//" + QString::number(lineIndex) + "\n";
 				targetJSCode += "SPDF.preloadStory(\""+metaName+"." +StoryPartName+ "\"," + StoryFileName + "_SPOL." + StoryPartName + ");\n";
+				lineIndex = 0;
 			}
 			StoryPartName = i->mid(3, -1);
 			StoryPartContent = "";
 			targetJSCode += "\n" + StoryFileName + "_SPOL." + StoryPartName + " = \n[";
 			continue;
 		}
-		targetJSCode += "\"" + (*i).replace("\\", "\\\\").replace("\"", "\\\"") + "\", \n";
+		targetJSCode += "\"" + (*i).replace("\\", "\\\\").replace("\"", "\\\"") + "\", //"+QString::number(lineIndex) + "\n";
+		lineIndex++;
 	}
 	if (StoryPartName != "") {
-		targetJSCode += StoryPartContent + "\"\"];\n";
+		targetJSCode += StoryPartContent + "\"\"];//" + QString::number(lineIndex) + "\n";
 		targetJSCode += "SPDF.preloadStory(\"" + metaName + "." + StoryPartName + "\"," + StoryFileName + "_SPOL." + StoryPartName + ");\n";
 	}
 
