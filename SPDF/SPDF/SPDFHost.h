@@ -33,8 +33,8 @@ class SPDFPublicAPI SPDFHost :public VIObject
 	VI_OBJECT;
 	friend class SPDF::Package;
 	_Public SPDFScripts* Scripts;
-	_Public SPDFAbstractTerminal* Terminal;
-	_Protected def_init SPDFHost(SPDFAbstractTerminal* ter, VISuper* parent = VI_NULLPTR);
+	_Public SPDFAbstractStage* Terminal;
+	_Protected def_init SPDFHost(SPDFAbstractStage* ter, VISuper* parent = VI_NULLPTR);
 	_Public void exec(QString filePath);
-	_Public void installParser(SPDFAbstractControllerParser* p);
+	_Public void installParser(SPOLAbstractControllerParser* p);
 };

@@ -6,7 +6,7 @@ export function syn_SPOL() {}
 
 syn_SPOL.__head__ = 
 [""];
-SPOL.preloadStory("SPDF.resource.syn.__head__",syn_SPOL.__head__);
+SPDF.preloadStory("SPDF.resource.syn.__head__",syn_SPOL.__head__);
 
 syn_SPOL.PartA = 
 ["SWITCH 2", 
@@ -29,5 +29,5 @@ syn_SPOL.PartA =
 ">>>:\"Hello World 0\"", 
 "", 
 ""];
-SPOL.preloadStory("SPDF.resource.syn.PartA",syn_SPOL.PartA);
+SPDF.preloadStory("SPDF.resource.syn.PartA",syn_SPOL.PartA);
 

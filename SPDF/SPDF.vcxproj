@@ -21,26 +21,28 @@
   <ItemGroup>
     <ClCompile Include="SPDF\cpp\SPDFHost.cpp" />
     <ClCompile Include="SPDF\cpp\SPDFPackage.cpp" />
-    <ClCompile Include="SPDF\cpp\SPDFParser.cpp" />
+    <ClCompile Include="SPDF\cpp\SPOLAbstractParser.cpp" />
     <ClCompile Include="SPDF\cpp\SPDFScripts.cpp" />
     <ClCompile Include="SPDF\cpp\SPDFTerminal.cpp" />
     <ClCompile Include="SPDF\cpp\SPOLAbstractSegment.cpp" />
+    <ClCompile Include="SPDF\cpp\SPOLDocument.cpp" />
     <ClCompile Include="SPDF\cpp\SPOLInterpreter.cpp" />
     <ClCompile Include="SPDF\cpp\SPSReader.cpp" />
-    <ClCompile Include="SPDF\cpp\VIECMA_SPOL.cpp" />
+    <ClCompile Include="SPDF\cpp\VIECMA_SPDF.cpp" />
     <ClCompile Include="SPDFMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SPDF\SPDFControllerDocument.h" />
+    <ClInclude Include="SPDF\SPOLStandardController.h" />
     <ClInclude Include="SPDF\SPDF.h" />
+    <QtMoc Include="SPDF\SPOLDocument.h" />
     <QtMoc Include="SPDF\SPOLClassicTester.h" />
     <QtMoc Include="SPDF\SPOLAbstractSegment.h" />
-    <QtMoc Include="SPDF\VIECMA_SPOL.h" />
+    <QtMoc Include="SPDF\VIECMA_SPDF.h" />
     <QtMoc Include="SPDF\SPSReader.h" />
     <QtMoc Include="SPDF\SPOLInterpreter.h" />
     <QtMoc Include="SPDF\SPDFTerminal.h" />
     <QtMoc Include="SPDF\SPDFScripts.h" />
-    <QtMoc Include="SPDF\SPDFParser.h" />
+    <QtMoc Include="SPDF\SPOLAbstractParser.h" />
     <QtMoc Include="SPDF\SPDFHost.h" />
     <QtMoc Include="SPDF\SPDFPackage.h" />
     <QtMoc Include="SPDF\SPDFPackageMeta.h" />

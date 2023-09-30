@@ -74,7 +74,7 @@ export function " + StoryFileName + "_SPOL() {}\n";
 		if (i->startsWith("-->")) {
 			if (StoryPartName != "") {
 				targetJSCode += StoryPartContent + "\"\"];\n";
-				targetJSCode += "SPOL.preloadStory(\""+metaName+"." +StoryPartName+ "\"," + StoryFileName + "_SPOL." + StoryPartName + ");\n";
+				targetJSCode += "SPDF.preloadStory(\""+metaName+"." +StoryPartName+ "\"," + StoryFileName + "_SPOL." + StoryPartName + ");\n";
 			}
 			StoryPartName = i->mid(3, -1);
 			StoryPartContent = "";
@@ -85,7 +85,7 @@ export function " + StoryFileName + "_SPOL() {}\n";
 	}
 	if (StoryPartName != "") {
 		targetJSCode += StoryPartContent + "\"\"];\n";
-		targetJSCode += "SPOL.preloadStory(\"" + metaName + "." + StoryPartName + "\"," + StoryFileName + "_SPOL." + StoryPartName + ");\n";
+		targetJSCode += "SPDF.preloadStory(\"" + metaName + "." + StoryPartName + "\"," + StoryFileName + "_SPOL." + StoryPartName + ");\n";
 	}
 
 	targetJSCode += "\n";

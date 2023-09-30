@@ -48,7 +48,7 @@ class SPDFTestAnimation_Text :public VIAnimationBehavior
 		emit finished();
 	}
 };
-class SPDFClassicTester :public SPDFAbstractTerminal
+class SPDFClassicTester :public SPDFAbstractStage
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -57,7 +57,7 @@ class SPDFClassicTester :public SPDFAbstractTerminal
 		TextAnimation = new SPDFTestAnimation_Text(this);
 		connect(TextAnimation, &SPDFTestAnimation_Text::finished, this, &SPDFClassicTester::controllerHandled);
 	}
-	_Slot void onControllers(SPDFParserResultList* list, SPDF::SPOLExecutionMode mode) override {
+	_Slot void onControllers(SPDFControllerDataList* list, SPDF::SPOLExecutionMode mode) override {
 		consoleLog("get controllers, count: " + QString::number(list->length()) + ".");
 		bool noController = true;
 		for (auto i = list->begin(); i != list->end(); i++) {

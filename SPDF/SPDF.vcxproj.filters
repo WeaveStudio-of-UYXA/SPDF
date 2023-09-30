@@ -32,7 +32,7 @@
     <ClCompile Include="SPDF\cpp\SPDFTerminal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SPDF\cpp\VIECMA_SPOL.cpp">
+    <ClCompile Include="SPDF\cpp\VIECMA_SPDF.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SPDF\cpp\SPDFHost.cpp">
@@ -47,10 +47,13 @@
     <ClCompile Include="SPDF\cpp\SPDFScripts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SPDF\cpp\SPDFParser.cpp">
+    <ClCompile Include="SPDF\cpp\SPOLAbstractParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SPDF\cpp\SPOLAbstractSegment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPOLDocument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -61,7 +64,7 @@
     <ClInclude Include="SPDF\SPDF.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SPDF\SPDFControllerDocument.h">
+    <ClInclude Include="SPDF\SPOLStandardController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -75,7 +78,7 @@
     <QtMoc Include="SPDF\SPDFHost.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="SPDF\SPDFParser.h">
+    <QtMoc Include="SPDF\SPOLAbstractParser.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="SPDF\SPDFScripts.h">
@@ -90,13 +93,16 @@
     <QtMoc Include="SPDF\SPSReader.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="SPDF\VIECMA_SPOL.h">
+    <QtMoc Include="SPDF\VIECMA_SPDF.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="SPDF\SPOLAbstractSegment.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="SPDF\SPOLClassicTester.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPOLDocument.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -9,9 +9,9 @@
 #endif
 
 // 以下宏定义了SPDF的版本号，您可以在此修改版本号。
-#define SPDF_VERSION_MAJOR 0
-#define SPDF_VERSION_MINOR 10
-#define SPDF_VERSION_PATCH 3
+#define SPDF_VERSION_MAJOR 10
+#define SPDF_VERSION_MINOR 0
+#define SPDF_VERSION_PATCH 0
 
 #define SPDF_USER
 #ifdef SPDF_EVERYWHERE // 此宏在非Dll编译选项中项目内部定义，参见项目调试属性->C/C++ ->预定义宏

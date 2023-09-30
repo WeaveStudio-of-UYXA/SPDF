@@ -1,28 +1,27 @@
 ﻿#pragma once
-#include "SPDFParser.h"
+#include "SPOLAbstractParser.h"
 #include "SPOLAbstractSegment.h"
-typedef QMap<QString, QString> SPOLContext;
-typedef QMap<QString, SPDFAbstractControllerParser*> SPDFParserMap;
+#include "SPOLDocument.h"
+typedef QMap<QString, SPOLAbstractControllerParser*> SPDFParserMap;
 
 /*
 SPOL解释器
 SPOL解释器在VIECMAScript的线程中运行，请勿进行危险操作
 */
 
-class VIECMA_SPOL;
+class VIECMA_SPDF;
 class SPDFPublicAPI SPOLInterpreter :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	friend class VIECMA_SPOL;
+	friend class VIECMA_SPDF;
 	friend class SPOLAbstractSegment;
 	_Signal void sceneFinished(SPDF::SPOLExecutionMode mode);
 	_Signal void spolDocumentChanged(const QStringList& spol, SPDF::SPOLExecutionMode mode);
-	_Signal void onControllers(SPDFParserResultList* list, SPDF::SPOLExecutionMode mode);
-	_Private SPDFAbstractTerminal* Terminal;
-	_Private SPDFParserMap Parsers;
+	_Signal void onControllers(SPDFControllerDataList* list, SPDF::SPOLExecutionMode mode);
+	_Private SPDFAbstractStage* Terminal;
+	_Private SPOLControllerParserManager* ParserManager;
 	_Private QList<QString> SPOLDocument;
-	_Private SPOLContext SPOLDocumentContext;
 	_Private bool SceneFinished;
 	_Private QMutex* ThreadMutex;
 	_Private QWaitCondition* ThreadWaitCondition;
@@ -30,14 +29,14 @@ class SPDFPublicAPI SPOLInterpreter :public VIObject
 	_Private QList<QString>::Iterator CurrentLine;
 	_Protected QMap<QString, QStringList> SPOLDocumentMap;
 	VI_ProtectedProperty(QString, CurrentMetaName);
-	_Private QHash<QString, QVariant> Variables;
 	_Private QStack<SPOLAbstractSegment*> SegmentStack;
+	_Protected QStack<SPOLSegment_FUNC*> FuncStack;
 	_Private QList<SPOLAbstractSegment*> SegmentParserList;
 	_Private bool allowIndentAdd = false;
 	_Private qint32 CurrentIndent = 0;
-	_Public def_init SPOLInterpreter(SPDFAbstractTerminal* terminal, QMutex* mutex, QWaitCondition* waitCondition);
+	_Public def_init SPOLInterpreter(SPDFAbstractStage* terminal, QMutex* mutex, QWaitCondition* waitCondition);
 	_Public def_del ~SPOLInterpreter();
-	_Public void addParser(SPDFAbstractControllerParser* parser);
+	_Public void addParser(SPOLAbstractControllerParser* parser);
 	_Public void addSPOL(const QString& metaName, const QStringList& spol);
 	_Public QString getSPOLWithIndex(unsigned int index);
 	_Public quint32 getCurrentSPOLDocumentLength();

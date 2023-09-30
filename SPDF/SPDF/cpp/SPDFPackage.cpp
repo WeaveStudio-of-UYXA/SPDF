@@ -32,7 +32,7 @@ namespace SPDF {
 		getPackageMeta()->initTranslation();
 		Host = VI_NULL;
 	}
-	void Package::attachNewHostToTerminal(SPDFAbstractTerminal* terminal) {
+	void Package::attachNewHostToTerminal(SPDFAbstractStage* terminal) {
 		if (Host != VI_NULL) {
 			Host->deleteLater();
 		}
