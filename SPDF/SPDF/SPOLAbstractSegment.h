@@ -24,8 +24,12 @@ class SPDFPublicAPI SPOLSegment_FUNC :public SPOLAbstractSegment
 	_Protected QStack<QString> FuncNameStack;
 	_Protected QStack<qint32> JumpStack;
 	_Protected QMap<QString, qint32> FuncNameMap;
+	_Public def_init SPOLSegment_FUNC() {
+		FirstIndentStack.push(-4);
+		SegmentIndentStack.push(0);
+	}
 	_Public virtual void onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) override {}
-	_Public virtual bool onIndentMinus() override {}
+	_Public virtual bool onIndentMinus() override { return true; }
 };
 
 class SPDFPublicAPI SPOLSegment_Global :public SPOLAbstractSegment

@@ -34,11 +34,10 @@ void VIECMA_SPDF::render(QJSValue spolLinesRaw) {
 }
 void VIECMA_SPDF::renderAll() {
 	consoleLog("SPOL rendering all stories...");
-	for (auto it = Scripts->Interpreter->SPOLDocumentMap.begin(); it != Scripts->Interpreter->SPOLDocumentMap.end(); it++) {
-		if (it.value().size() == 0) { continue; }
-		if (it.key().contains("__head__")) { continue; }
-		Scripts->Interpreter->setCurrentMetaName(it.key());
-		Scripts->Interpreter->executeSPOL(SPDF::SPOLExecutionMode::Render, it.value());
+	QStringList metaNames = Scripts->Interpreter->DocumentManager->getMetaNames();
+	for (auto it = metaNames.begin(); it != metaNames.end(); it++) {
+		if (it->contains("__head__")) { continue; }
+		Scripts->Interpreter->executeSPOL(SPDF::SPOLExecutionMode::Render, *it);
 	}
 	consoleLog("SPOL all stories rendered.");
 }

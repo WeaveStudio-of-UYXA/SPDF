@@ -42,6 +42,6 @@ class SPDFPublicAPI SPDFAbstractStage :public VIObject
 	_Slot virtual void controllerFinishedListener() final;
 	_Slot virtual void privateOnControllers(SPDFControllerDataList* ParserList, SPDF::SPOLExecutionMode mode) final;
 	_Slot virtual void onControllers(SPDFControllerDataList* ParserList, SPDF::SPOLExecutionMode mode) PureVirtual;
-	_Slot virtual void onSPOLDocumentChanged(const QStringList& spol, SPDF::SPOLExecutionMode mode) PureVirtual;
+	_Slot virtual void onSPOLDocumentChanged(const QString& metaName, SPDF::SPOLExecutionMode mode) PureVirtual;
 	_Slot virtual void onSceneFinished(SPDF::SPOLExecutionMode mode) PureVirtual;
 };

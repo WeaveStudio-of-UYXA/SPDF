@@ -74,10 +74,10 @@ class SPDFClassicTester :public SPDFAbstractStage
 		}
 		if (noController) { emit controllerHandled(); }
 	}
-	_Public virtual void onSPOLDocumentChanged(const QStringList& spol, SPDF::SPOLExecutionMode mode) {
+	_Public virtual void onSPOLDocumentChanged(const QString& metaName, SPDF::SPOLExecutionMode mode) override {
 		controllerHandled();
 	}
-	_Public virtual void onSceneFinished(SPDF::SPOLExecutionMode mode) {
+	_Public virtual void onSceneFinished(SPDF::SPOLExecutionMode mode) override{
 		controllerHandled();
 	}
 };

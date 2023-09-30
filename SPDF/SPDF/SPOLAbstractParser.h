@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "SPDFTerminal.h"
+#include "SPDFAbstractStage.h"
 
 class SPOLInterpreter;
 class SPDFPublicAPI SPOLAbstractControllerParser :public VIObject

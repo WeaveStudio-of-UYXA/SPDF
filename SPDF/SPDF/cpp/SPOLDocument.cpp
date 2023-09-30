@@ -5,9 +5,17 @@ def_init SPOLDocument::SPOLDocument(const QString& name, const QStringList& doc)
 	Document = doc;
 }
 
+def_init SPOLDocumentManager::SPOLDocumentManager(VISuper* super) :VIObject(super) {
+
+}
 void SPOLDocumentManager::addSPOLDocument(const SPOLDocument& doc) {
 	if (!Documents.contains(doc.MetaName)) {
 		Documents.insert(doc.MetaName, doc);
+	}
+	else {
+		if (doc.MetaName == "temp") {
+			Documents["temp"] =  doc;
+		}
 	}
 }
 
@@ -26,6 +34,10 @@ void SPOLDocumentManager::changeCurrentDocument(const QString& name) {
 	}
 }
 
+void SPOLDocumentManager::changeCurrentDocument(const QStringList& doc) {
+	addSPOLDocument("temp", doc);
+	changeCurrentDocument("temp");
+}
 QStringList SPOLDocumentManager::getMetaNames() {
 	return Documents.keys();
 }
@@ -43,12 +55,20 @@ void SPOLDocumentManager::changeCurrentLineIndex(int index) {
 	}
 }
 
+bool SPOLDocumentManager::currentLineChanged() {
+	return CurrentLineChanged;
+}
 int SPOLDocumentManager::getCurrentLineIndex() {
 	if (CurrentDocument != nullptr) {
 		return CurrentLine - CurrentDocument->begin();
 	}
 }
 
+int SPOLDocumentManager::getCurrentDocumentLength() {
+	if (CurrentDocument != nullptr) {
+		return CurrentDocument->size();
+	}
+}
 QString SPOLDocumentManager::getCurrentLine() {
 	if (CurrentDocument != nullptr) {
 		return *CurrentLine;
@@ -69,5 +89,11 @@ QString SPOLDocumentManager::iterateNextLine() {
 		QString rtn = *CurrentLine;
 		CurrentLine++;
 		return rtn;
+	}
+}
+
+bool SPOLDocumentManager::iterateEnd() {
+	if (CurrentDocument != nullptr) {
+		return CurrentLine == CurrentDocument->end();
 	}
 }
