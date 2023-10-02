@@ -1,0 +1,15 @@
+{
+    "Tag": "Cyclo",
+    "Name": "SPDF::CycloramaController",
+    "Function": true,
+    "Waiting": true,
+    "Count": 1,
+    "Split": ",",
+    "SubPart":{
+      "3": [
+          { "Name": "FileName", "Default": "" },
+          { "Name": "Effect", "Default": "" },
+          { "Name": "FadeIn", "Default": "0" }
+      ]
+    }
+  }

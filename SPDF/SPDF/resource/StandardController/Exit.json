@@ -1,0 +1,14 @@
+{
+    "Tag": "<__",
+    "Name": "SPDF::ExitController",
+    "Function": false,
+    "Waiting": true,
+    "Count": 2,
+    "Split": "/",
+    "SubPart":{
+      "2": [
+          { "Name": "FileName", "Default": "" },
+          { "Name": "FadeOut", "Default": "0" }
+      ]
+    }
+  }

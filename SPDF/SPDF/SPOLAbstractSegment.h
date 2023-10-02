@@ -10,7 +10,7 @@ class SPDFPublicAPI SPOLAbstractSegment :public VIObject
 	_Protected QStack<qint32> FirstIndentStack;
 	_Protected QStack<qint32> SegmentIndentStack;
 	_Public QString SegmentName;
-	_Public virtual void onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) HalfVirtual;
+	_Public virtual bool onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) { return true; };
 	_Public virtual bool onIndentMinus() { return true; }
 };
 
@@ -30,7 +30,7 @@ class SPDFPublicAPI SPOLSegment_FUNC :public SPOLAbstractSegment
 		FuncNameStack.push("__global__");
 		FuncNameMap.insert("__global__", 0);
 	}
-	_Public virtual void onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) override {}
+	_Public virtual bool onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) override { return true; }
 	_Public virtual bool onIndentMinus() override { return true; }
 };
 
@@ -51,6 +51,6 @@ class SPDFPublicAPI SPOLSegment_SWITCH :public SPOLAbstractSegment
 	_Public def_init SPOLSegment_SWITCH() {
 		
 	}
-	_Public virtual void onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) override;
+	_Public virtual bool onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) override;
 	_Public virtual bool onIndentMinus() override;
 };

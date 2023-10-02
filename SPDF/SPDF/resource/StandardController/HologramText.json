@@ -1,0 +1,17 @@
+{
+    "Tag": ">^>",
+    "Name": "SPDF::HologramTextController",
+    "Function": false,
+    "Waiting": true,
+    "Count": 1,
+    "Split": "/",
+    "SubPart":{
+      "5": [
+          { "Name": "PosX", "Default": "0" },
+          { "Name": "PosY", "Default": "0.5" },
+          { "Name": "Width", "Default": "1.0" },
+          { "Name": "Align", "Default": "Center" },
+          { "Name": "Text", "Default": "" }
+      ]
+    }
+  }

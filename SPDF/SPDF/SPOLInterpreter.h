@@ -49,5 +49,6 @@ class SPDFPublicAPI SPOLInterpreter :public VIObject
 	_Public static qint32 indentCharCount(const QString& line);
 	_Public static QString removeIndent(QString line);
 	_Public void popSegment();
+	_Public QVariant getReturnRegister();
 	_Private void wait();
 };

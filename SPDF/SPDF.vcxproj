@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="SPDF\cpp\SPDFHost.cpp" />
     <ClCompile Include="SPDF\cpp\SPDFPackage.cpp" />
+    <ClCompile Include="SPDF\cpp\SPOLStandardController.cpp" />
     <ClCompile Include="SPDF\cpp\SPOLAbstractParser.cpp" />
     <ClCompile Include="SPDF\cpp\SPDFScripts.cpp" />
     <ClCompile Include="SPDF\cpp\SPDFAbstractStage.cpp" />
@@ -32,7 +33,7 @@
     <ClCompile Include="SPDFMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SPDF\SPOLStandardController.h" />
+    <QtMoc Include="SPDF\SPOLStandardController.h" />
     <ClInclude Include="SPDF\SPDF.h" />
     <QtMoc Include="SPDF\SPOLDocument.h" />
     <QtMoc Include="SPDF\SPOLClassicTester.h" />
@@ -47,6 +48,9 @@
     <QtMoc Include="SPDF\SPDFPackage.h" />
     <QtMoc Include="SPDF\SPDFPackageMeta.h" />
     <ClInclude Include="SPDF\private\SPDFCompileMacro.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resource.qrc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7dc45fe1-dfa4-4bd1-936a-0518959f893c}</ProjectGuid>

@@ -23,9 +23,13 @@ QStringList SPSReader::spawnAllStoryFile(const QString& mainFilePath) {
 }
 
 QString SPSReader::spawnStoryFile(const QString& mainFilePath, const QString& rawJSFilePath) {
-	QString RawFolder = rawJSFilePath.section('/', 0, -2);
+	QString RawFolder = mainFilePath.section('/', 0, -2);
+	if (RawFolder.startsWith(".")) {
+		RawFolder = RawFolder.mid(1, -1);
+	}
 	QDir RawDir(RawFolder);
-	QString relativePath = RawDir.relativeFilePath(rawJSFilePath);
+	QString jsFilePath = rawJSFilePath.startsWith(".") ? rawJSFilePath.mid(1, -1) : rawJSFilePath;
+	QString relativePath = RawDir.relativeFilePath(jsFilePath);
 	QString metaName = relativePath.replace("/", ".").section('.', 0, -2);
 	QString FileFolder = rawJSFilePath.section('/', 0, -2);
 	QString StoryFileFolder = FileFolder + "/__story__";
@@ -71,7 +75,17 @@ export function " + StoryFileName + "_SPOL() {}\n";
 	QString StoryPartContent = "";
 	targetJSCode += "\n" + StoryFileName + "_SPOL." + StoryPartName + " = \n[";
 	int lineIndex = 0;
+	bool inMultiLineComment = false;
 	for (auto i = storyFileContent.begin(); i != storyFileContent.end(); i++) {
+		if (i->startsWith("###")) {
+			inMultiLineComment = !inMultiLineComment;
+			if (!inMultiLineComment) {
+				continue;
+			}
+		}
+		if (inMultiLineComment) {
+			continue;
+		}
 		if (i->startsWith("-->")) {
 			if (StoryPartName != "") {
 				targetJSCode += StoryPartContent + "\"\"];//" + QString::number(lineIndex) + "\n";
@@ -83,7 +97,11 @@ export function " + StoryFileName + "_SPOL() {}\n";
 			targetJSCode += "\n" + StoryFileName + "_SPOL." + StoryPartName + " = \n[";
 			continue;
 		}
-		targetJSCode += "\"" + (*i).replace("\\", "\\\\").replace("\"", "\\\"") + "\", //"+QString::number(lineIndex) + "\n";
+		QString line = *i;
+		if (line.contains("#")) {
+			line = line.section('#', 0, -2);
+		}
+		targetJSCode += "\"" + line.replace("\\", "\\\\").replace("\"", "\\\"") + "\", //"+QString::number(lineIndex) + "\n";
 		lineIndex++;
 	}
 	if (StoryPartName != "") {

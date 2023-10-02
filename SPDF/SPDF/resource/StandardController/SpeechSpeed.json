@@ -1,0 +1,14 @@
+{
+    "Tag": "speed",
+    "Name": "SPDF::SpeechSpeedController",
+    "Function": true,
+    "Waiting": true,
+    "Count": 1,
+    "Split": ",",
+    "SubPart":{
+      "2": [
+          { "Name": "MsPerChar", "Default": "40" },
+          { "Name": "MsPerSentence", "Default": "1500" }
+      ]
+    }
+  }

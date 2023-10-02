@@ -1,0 +1,16 @@
+{
+    "Tag": ">__",
+    "Name": "SPDF::EntranceController",
+    "Function": false,
+    "Waiting": true,
+    "Count": 2,
+    "Split": "/",
+    "SubPart":{
+      "4": [
+          { "Name": "FileName", "Default": "" },
+          { "Name": "Emotion", "Default": "" },
+          { "Name": "Filter", "Default": "" },
+          { "Name": "FadeIn", "Default": "0" }
+      ]
+    }
+  }

@@ -19,6 +19,7 @@ class SPDFPublicAPI SPDFScripts :public VIObject
 	_Private QList<SPOLAbstractControllerParser*> Parsers;
 	_Private VIECMA_SPDF* ESSPOL;
 	_Private SPDFAbstractStage* Terminal;
+	VI_PrivateProperty(QString, RootFilePath);
 	_Public def_init SPDFScripts(SPDFAbstractStage* ter, VISuper* parent = VI_NULLPTR);
 	_Public void addParser(SPOLAbstractControllerParser* parser);
 	_Public void exec(const QString& path, const QString& entry = "main");

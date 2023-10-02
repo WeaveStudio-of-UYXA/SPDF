@@ -1,0 +1,32 @@
+{
+    "Tag": "^_=",
+    "Name": "SPDF::ObjectEnableController",
+    "Function": false,
+    "Waiting": true,
+    "Count": 1,
+    "Split": ",",
+    "SubPart":{
+      "3": [
+          { "Name": "ObjectName", "Default": "" },
+          { "Name": "FunctionName", "Default": "" },
+          "Parameters"
+      ]
+    },
+    "CustomStruct": {
+      "Parameters":{
+        "Name": "Parameters",
+        "Split": "/",
+        "Default": " ",
+        "SubPart":{
+          "6":[
+            { "Name": "P1", "Default": "" },
+            { "Name": "P2", "Default": "" },
+            { "Name": "P3", "Default": "" },
+            { "Name": "P4", "Default": "" },
+            { "Name": "P5", "Default": "" },
+            { "Name": "P6", "Default": "" }
+          ]
+        }
+      }
+    }
+  }

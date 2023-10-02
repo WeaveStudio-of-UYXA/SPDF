@@ -1,0 +1,14 @@
+{
+    "Tag": "|||",
+    "Name": "SPDF::SpectatorChoiceController",
+    "Function": false,
+    "Waiting": true,
+    "Count": 10,
+    "Split": ":",
+    "SubPart":{
+      "2": [
+          { "Name": "ChoiceTag", "Default": "" },
+          { "Name": "ChoiceData", "Default": "" }
+      ]
+    }
+  }

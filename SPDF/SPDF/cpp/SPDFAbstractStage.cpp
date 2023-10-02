@@ -23,6 +23,10 @@ SPDFControllerData& SPDFControllerData::operator=(const SPDFControllerData& obj)
 	return *this;
 }
 
+void SPDFAbstractStage::saveReturn(const QVariant& value) {
+	ReturnRegister = value;
+	controllerHandled();
+}
 void SPDFAbstractStage::controllerFinishedListener(){
 	ControllerWaitCount--;
 	if (ControllerWaitCount == 0) { controllerHandled(); }

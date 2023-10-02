@@ -1,0 +1,13 @@
+{
+    "Tag": "<_=",
+    "Name": "SPDF::ObjectEnableController",
+    "Function": false,
+    "Waiting": true,
+    "Count": 1,
+    "Split": ",",
+    "SubPart":{
+      "1": [
+          { "Name": "ObjectName", "Default": "" }
+      ]
+    }
+  }

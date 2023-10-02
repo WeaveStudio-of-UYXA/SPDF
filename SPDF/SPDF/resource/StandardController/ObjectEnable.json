@@ -1,0 +1,15 @@
+{
+    "Tag": ">_=",
+    "Name": "SPDF::ObjectEnableController",
+    "Function": false,
+    "Waiting": true,
+    "Count": 1,
+    "Split": ",",
+    "SubPart":{
+      "3": [
+          { "Name": "ObjectName", "Default": "" },
+          { "Name": "ObjectType", "Default": "image" },
+          { "Name": "ObjectLayer", "Default": "SideStage" }
+      ]
+    }
+  }

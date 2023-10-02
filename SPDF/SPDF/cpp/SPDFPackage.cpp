@@ -3,7 +3,7 @@
 */
 
 #include "../SPDFPackage.h"
-
+#include "../SPOLStandardController.h"
 VI_Singleton_StaticInit(SPDF::PackageMeta);
 VI_Singleton_StaticInit(SPDF::Package);
 
@@ -38,5 +38,19 @@ namespace SPDF {
 		}
 		Host = new SPDFHost(terminal, this);
 		terminal->Host = Host;
+		Host->installParser(new SPDF::EntranceController);
+		Host->installParser(new SPDF::ExitController);
+		Host->installParser(new SPDF::SpeakingController);
+		Host->installParser(new SPDF::DialogueController);
+		Host->installParser(new SPDF::CycloramaController);
+		Host->installParser(new SPDF::MusicController);
+		Host->installParser(new SPDF::SoundController);
+		Host->installParser(new SPDF::ProsceniumCurtainController);
+		Host->installParser(new SPDF::HologramTextController);
+		Host->installParser(new SPDF::SpeechSpeedController);
+		Host->installParser(new SPDF::ObjectEnableController);
+		Host->installParser(new SPDF::ObjectDisableController);
+		Host->installParser(new SPDF::ObjectFunctionController);
+		Host->installParser(new SPDF::SpectatorChoiceController);
 	}
 }

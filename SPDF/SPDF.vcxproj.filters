@@ -29,9 +29,6 @@
     <ClCompile Include="SPDF\cpp\SPDFPackage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SPDF\cpp\SPDFTerminal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SPDF\cpp\VIECMA_SPDF.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -56,15 +53,18 @@
     <ClCompile Include="SPDF\cpp\SPOLDocument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPDFAbstractStage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDF\cpp\SPOLStandardController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SPDF\private\SPDFCompileMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SPDF\SPDF.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SPDF\SPOLStandardController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -82,9 +82,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="SPDF\SPDFScripts.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="SPDF\SPDFTerminal.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="SPDF\SPOLInterpreter.h">
@@ -105,5 +102,16 @@
     <QtMoc Include="SPDF\SPOLDocument.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="SPDF\SPDFAbstractStage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDF\SPOLStandardController.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resource.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
   </ItemGroup>
 </Project>

@@ -1,0 +1,19 @@
+{
+    "Tag": ">",
+    "Name": "SPDF::SpeakingController",
+    "Function": false,
+    "Waiting": true,
+    "Count": 1,
+    "Split": ":",
+    "SubPart":{
+      "2": [
+          { "Name": "FileName", "Default": "" },
+          { "Name": "Text", "Default": "" }
+      ],
+      "3": [
+            { "Name": "FileName", "Default": "" },
+            { "Name": "DisplayName", "Default": "" },
+          { "Name": "Text", "Default": "" }
+      ]
+    }
+  }

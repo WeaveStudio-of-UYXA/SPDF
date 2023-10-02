@@ -1,0 +1,16 @@
+{
+    "Tag": "Music",
+    "Name": "SPDF::MusicController",
+    "Function": true,
+    "Waiting": true,
+    "Count": 1,
+    "Split": ",",
+    "SubPart":{
+      "4": [
+          { "Name": "FileName", "Default": "" },
+          { "Name": "Volume", "Default": "50" },
+          { "Name": "FadeIn", "Default": "0" },
+          { "Name": "LoopStamp", "Default": ""}
+      ]
+    }
+  }

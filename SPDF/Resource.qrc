@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/package">
+        <file>SPDF/resource/StandardController/Cyclorama.json</file>
+        <file>SPDF/resource/StandardController/Dialogue.json</file>
+        <file>SPDF/resource/StandardController/Entrance.json</file>
+        <file>SPDF/resource/StandardController/Exit.json</file>
+        <file>SPDF/resource/StandardController/HologramText.json</file>
+        <file>SPDF/resource/StandardController/Music.json</file>
+        <file>SPDF/resource/StandardController/ObjectDisable.json</file>
+        <file>SPDF/resource/StandardController/ObjectEnable.json</file>
+        <file>SPDF/resource/StandardController/ObjectFunction.json</file>
+        <file>SPDF/resource/StandardController/Sound.json</file>
+        <file>SPDF/resource/StandardController/Speaking.json</file>
+        <file>SPDF/resource/StandardController/SpectatorChoice.json</file>
+        <file>SPDF/resource/StandardController/SpeechSpeed.json</file>
+        <file>SPDF/resource/StandardController/ProsceniumCurtain.json</file>
+    </qresource>
+</RCC>

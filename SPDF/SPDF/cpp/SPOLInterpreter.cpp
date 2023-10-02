@@ -90,6 +90,9 @@ void SPOLInterpreter::executeSPOL(SPDF::SPOLExecutionMode mode) {
 		}
 		QString CurrentLine = DocumentManager->iterateNextLine();
 		qint32 indentChar = checkIndent(CurrentLine);
+		if (indentChar == -1) {
+			break;
+		}
 		if (DocumentManager->currentLineChanged()) {
 			continue;
 		}
@@ -109,8 +112,7 @@ void SPOLInterpreter::executeSPOLSingleLine(const QString& line, SPDF::SPOLExecu
 		if (line.startsWith(i->SegmentName)) {
 			SegmentStack.push(i);
 			i->FirstIndentStack.push(CurrentIndent);
-			i->onParseLine(line, mode);
-			allowIndentAdd = true;
+			allowIndentAdd = i->onParseLine(line, mode);
 			return;
 		}
 	}
@@ -189,7 +191,8 @@ qint32 SPOLInterpreter::checkIndent(const QString& line) {
 			SegmentStack.top()->SegmentIndentStack.push(indentCount);
 		}
 		else {
-			throw "Unexpected Indent add. Syntax Error.";
+			consoleLog("Unexpected Indent add. Syntax Error.");
+			return -1;
 		}
 		allowIndentAdd = false;
 	}
@@ -235,6 +238,9 @@ void SPOLInterpreter::popSegment() {
 	SegmentStack.top()->FirstIndentStack.pop();
 	SegmentStack.top()->SegmentIndentStack.pop();
 	SegmentStack.pop();
+}
+QVariant SPOLInterpreter::getReturnRegister() {
+	return Terminal->getReturnRegister();
 }
 void SPOLInterpreter::wait() {
 	ThreadWaitCondition->wait(ThreadMutex);

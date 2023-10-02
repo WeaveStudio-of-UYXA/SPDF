@@ -1,0 +1,15 @@
+{
+    "Tag": "Sound",
+    "Name": "SPDF::SoundController",
+    "Function": true,
+    "Waiting": true,
+    "Count": 1,
+    "Split": ",",
+    "SubPart":{
+      "3": [
+          { "Name": "FileName", "Default": "" },
+          { "Name": "Volume", "Default": "50" },
+          { "Name": "FadeIn", "Default": "0" }
+      ]
+    }
+  }

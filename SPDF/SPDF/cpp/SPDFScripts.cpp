@@ -18,6 +18,7 @@ void SPDFScripts::addParser(SPOLAbstractControllerParser* parser) {
 
 void SPDFScripts::exec(const QString& path, const QString& entry) {
 	emit starting();
+	RootFilePath = path;
 	if (ESSPOL == VI_NULLPTR) {
 		ESSPOL = new VIECMA_SPDF();
 		ESSPOL->Scripts = this;

@@ -201,6 +201,13 @@ bool SPOLStandardControllerParser::onParseLine(const QString & line, QString roo
 			}
 		}
 		else { // when more than one subpart length is defined, subpart length must equal to defined length
+			//have to record the length of subpart
+			if (rootJSON == "") {
+				data->Parameters.insert("Count", QString::number(list.length()));
+			}
+			else {
+				data->Parameters.insert(rootJSON + ".Count", QString::number(list.length()));
+			}
 			if (!parts.contains(QString::number(list.length()))) {
 				consoleLog("Error: SubPart Count Error. SubPart Count must be " + parts.join(" or "));
 				return false;
@@ -279,6 +286,13 @@ bool SPOLStandardControllerParser::parseSubPart(const QString& part, const QStri
 			}
 		}
 		else { // when more than one subpart length is defined, subpart length must equal to defined length
+			//have to record the length of subpart
+			if (rootJSON == "") {
+				data->Parameters.insert("Count", QString::number(list.length()));
+			}
+			else {
+				data->Parameters.insert(rootJSON + ".Count", QString::number(list.length()));
+			}
 			if (!parts.contains(QString::number(list.length()))) {
 				consoleLog("Error: SubPart Count Error. SubPart Count must be " + parts.join(" or "));
 				return false;
@@ -323,8 +337,6 @@ void SPOLControllerParserManager::addSPOLParser(SPOLAbstractControllerParser* pa
 	if (length > MaxControllerFlagLength) {
 		MaxControllerFlagLength = length;
 	}
-	consoleLog("SPOLControllerParserManager: Max Controller Flag Length: " + QString::number(MaxControllerFlagLength));
-
 	if (Parsers.contains(length)) {
 		if (Parsers[length].contains(parser)) {
 			return;
@@ -362,6 +374,5 @@ int SPOLControllerParserManager::deriveParsersCount() {
 			count += Parsers[i].length();
 		}
 	}
-	consoleLog("SPOLControllerParserManager: Parsers Count: " + QString::number(count));
 	return count;
 }

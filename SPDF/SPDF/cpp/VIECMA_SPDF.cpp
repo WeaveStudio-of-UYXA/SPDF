@@ -11,7 +11,11 @@ void VIECMA_SPDF::loadStory(QJSValue spolLinesRaw) {
 	Scripts->Interpreter->executeSPOL(SPDF::SPOLExecutionMode::RunTime, spolLines);
 	consoleLog("SPOL story executed.");
 }
-
+void VIECMA_SPDF::loadStoryWithMeta(QJSValue metaName) {
+	consoleLog("SPOL executing story...");
+	Scripts->Interpreter->executeSPOL(SPDF::SPOLExecutionMode::RunTime, metaName.toString());
+	consoleLog("SPOL story executed.");
+}
 void VIECMA_SPDF::preloadStory(QJSValue metaName, QJSValue spolLinesRaw) {
 	QStringList spolLines = spolLinesRaw.toVariant().toStringList();
 	consoleLog("SPOL preloading story...");
@@ -19,8 +23,16 @@ void VIECMA_SPDF::preloadStory(QJSValue metaName, QJSValue spolLinesRaw) {
 	Scripts->Interpreter->executeSPOL(SPDF::SPOLExecutionMode::Preload, spolLines);
 	consoleLog("SPOL story preloaded.");
 }
+void VIECMA_SPDF::preloadSPOLFile(QJSValue spolfilePath) {
+	
+}
 void VIECMA_SPDF::installParser(QJSValue parser) {
 	SPOLVIESParserContainer* parserContainer = new SPOLVIESParserContainer(parser);
+	Scripts->Interpreter->addParser(parserContainer);
+}
+void VIECMA_SPDF::installStandardParser(QJSValue parser) {
+	SPOLStandardControllerParser* parserContainer = new SPOLStandardControllerParser();
+	parserContainer->setControllerJSON(parser.toString());
 	Scripts->Interpreter->addParser(parserContainer);
 }
 void VIECMA_SPDF::print(QJSValue text) {

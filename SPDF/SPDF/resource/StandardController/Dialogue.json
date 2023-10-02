@@ -1,8 +1,8 @@
 {
     "Tag": ">>>",
     "Name": "SPDF::DialogueController",
-    "Waiting": true,
     "Function": false,
+  	"Waiting": true,
     "Count": 2,
     "Split": ":",
     "SubPart": {

@@ -1,11 +1,12 @@
 ﻿#include "../SPOLAbstractSegment.h"
 #include "../SPOLInterpreter.h"
 
-void SPOLSegment_SWITCH::onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) {
-	QString exp = line.mid(7, line.length() - 7); // 7 = switch + space
+bool SPOLSegment_SWITCH::onParseLine(const QString& line, SPDF::SPOLExecutionMode mode) {
+	QString exp = Interpreter->getReturnRegister().toString();
 	int p = 0;
 	bool getACASE = false;
 	qint32 caseIndent = 0;
+	bool haveCASE = false;
 	while (true) {
 		if (Interpreter->getExecuteLineIndex() + p >= Interpreter->getCurrentSPOLDocumentLength()) {
 			break;
@@ -17,6 +18,7 @@ void SPOLSegment_SWITCH::onParseLine(const QString& line, SPDF::SPOLExecutionMod
 			Interpreter->changeExecuteLine(Interpreter->getExecuteLineIndex() + p);
 			SegmentIndentStack.push(indent);
 			Interpreter->popSegment();
+			return false;
 		}
 		else {
 			if (getACASE) {
@@ -36,12 +38,16 @@ void SPOLSegment_SWITCH::onParseLine(const QString& line, SPDF::SPOLExecutionMod
 				consoleLog("exp: " + exp);
 				if (caseExp == exp) {
 					Interpreter->changeExecuteLine(Interpreter->getExecuteLineIndex() + p + 1);
-					return;
+					return true;
 				}
 			}
 			p++;
 		}
 	}
+	Interpreter->changeExecuteLine(Interpreter->getExecuteLineIndex() + p);
+	SegmentIndentStack.push(FirstIndentStack.top());
+	Interpreter->popSegment();
+	return false;
 }
 
 bool SPOLSegment_SWITCH::onIndentMinus() {

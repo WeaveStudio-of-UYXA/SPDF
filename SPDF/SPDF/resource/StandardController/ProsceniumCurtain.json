@@ -1,0 +1,15 @@
+{
+    "Tag": "|^|",
+    "Name": "SPDF::ProsceniumCurtainController",
+    "Function": false,
+    "Waiting": true,
+    "Count": 1,
+    "Split": ",",
+    "SubPart":{
+      "3": [
+          { "Name": "FileName", "Default": "" },
+          { "Name": "IO", "Default": "on" },
+          { "Name": "Time", "Default": "0" }
+      ]
+    }
+  }
